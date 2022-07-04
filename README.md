@@ -76,10 +76,10 @@ Now all the script files can see their job done.
 This wil be overwrite the original file.
 
 **03 - ONE HMM FILE INSIDE 00_hmm_profile_target**<br>
-- Download from [Pfam](https://pfam.xfam.org/) the hmm file that you are going to use (maybe can be helpfull follow [the following guide](https://github.com/furacca/brivez/README_Pfam_database.md)).
+- Download from [Pfam](https://pfam.xfam.org/) the hmm file that you are going to use (maybe can be helpfull follow [the following guide](https://github.com/furacca/brivez/blob/main/README_Pfam_database.md)).
 
 **04 - OPTIONMAL - CHECKLIST**<br>
-- Follow this [checklist](https://github.com/furacca/brivez/README_checklist.md) to be sure that everything's ok.
+- Follow this [checklist](https://github.com/furacca/brivez/blob/main/README_checklist.md) to be sure that everything's ok.
 
 **05 - RUN BRIVEZ**<br>
 - In the root of the Brivez folder type in the terminal:<br>
