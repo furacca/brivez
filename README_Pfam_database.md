@@ -16,7 +16,7 @@ If you want to download the entire Pfam database (~1.6 GB, extracted)
 4) Done. 
 
 
-# How to download the a specific ~.hmm file
+# How to download a specific ~.hmm file
 1) Go to https://pfam.xfam.org/
 2) Click on the section "SEARCH" in the top menu
 3) Click on the section "Domain architecture" in the left menu
