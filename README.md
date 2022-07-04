@@ -3,24 +3,34 @@ Brivez is a bioinformatic tool which if provided with single/multiple transcript
 
 **At the moment this program run exclusively on Linux (tested on Debian 11 and Ubuntu 22.04).**
 
-All the software used is OpenSource.
+All the software used are OpenSource.<br>
+**Total memory used**: ~3.5 GB.<br>
+**Multi-core CPU** is suggested.<br>
+**SSD** is suggested.<br>
+<br>
+<br>
+## Index ##
+- [Suggested use](#suggested-use)<br>
+- [Software requirements](#software-requirements)<br>
+- [Quickly set up](#quickly-set-up)<br>
+- [Future updates](#future-updates)<br>
 
 # Suggested use
-Brivez is another bioinformatic program which has been thought as Quality of Life tool.
-Its main goal is to extracts all the domains sequence inside the proteins, given a sequence target (proteins list or transciprome) and a ~.hmm profile.
+Brivez is a bioinformatic tool which has been thought as Quality of Life's improvement.
+Its main goal is to extract all the domains sequence inside the proteins, given a sequence target (proteins list or transciprome) and a ~.hmm profile.
 
 
 # Software requirements
 Long list short:
-- Conda
+- Conda (~minimum 3 GB)
 - Environment inside Conda with:
-  - Deepsig
-  - Pandas
-  - Bioconda
-  - fnmatch (samtools)
-- HMMER3 v3.3.2
+  - Deepsig (~50 MB)
+  - Pandas (~15 MB)
+  - Bioconda 
+  - fnmatch (samtools -~1 MB)
+- HMMER3 v3.3.2 (~ 20 MB)
 
-## Setting things up - *quickly version*
+# Quickly set up
 
 1) **Quick install for [Conda](https://docs.conda.io/en/latest/)** (following the online doc is suggested):
    1) Download the installer at this [link](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html)
@@ -40,3 +50,13 @@ Long list short:
    1) `sudo apt-get install hmmer` (v3.3.2 both on Ubuntu 22.04 and Debian 11)
 
 
+# Future updates
+
+**TOP PRIORITY**
+- None
+
+**MEDIUM PRIORITY**
+- Extracted list of all SP (008_*.fa maybe?)
+
+**LOW PRIORITY**
+- Check some solution for Mac and Windows 10 - 11(W. subsystem for Linux)
