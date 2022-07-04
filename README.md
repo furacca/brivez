@@ -97,8 +97,8 @@ This wil be overwrite the original file.
 - Delete every output folder created and the log file with<br>
 `./wipe_all.sh`
 
-# Avoid the following 
-1) DO NOT CHANGE/RENAME/MOVE ANY FOLDER/FILE, unless is something that you have add.
+# Avoid the following
+DO NOT CHANGE/RENAME/MOVE ANY FOLDER/FILE, unless is something that you have added!
 
 
 # Future updates
