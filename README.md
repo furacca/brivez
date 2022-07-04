@@ -1,8 +1,14 @@
 <p align="center"><img src="./logo.png"></p>
 
-Brivez is a bioinformatic tool which if provided with single/multiple transcriptome.fasta file and profile.hmm domain it returns all the domains found in a single file.fasta (of course there are more in the readme).
+Brivez is a bioinformatic tool which, if provided with single/multiple transcriptome.fasta file and profile.hmm domain, 
+it returns all the domains found in a single file.fasta (of course there are more in the readme).
 
-**At the moment this program run exclusively on Linux (tested on Debian 11 and Ubuntu 22.04).**
+This tool provides high quantity of data in a snap, giving you a quick view on what you could find inside your sequences.
+The domain target is extracted from all the sequences with the structure `[SP] + [TargetDomain] x N` (**warning**: the tool
+doesn't check if there are other domains inside the same sequence, yet).
+
+**At the moment this program run exclusively on Linux (tested on Debian 11 and Ubuntu 22.04).** <br>
+See [Future updates](#future-updates) for Mac and Windows.
 
 All the software used are OpenSource.<br>
 **Total memory used**: ~3.5 GB.<br>
@@ -20,7 +26,8 @@ All the software used are OpenSource.<br>
 
 # Suggested use
 Brivez is a bioinformatic tool which has been thought as Quality of Life's improvement.
-Its main goal is to extract all the domains sequence inside the proteins, given a sequence target (proteins list or transciprome) and a ~.hmm profile.
+Its main goal is to extract all the domains sequence inside the proteins, given a sequence target (proteins list or 
+transciprome) and a ~.hmm profile.
 
 
 # Software requirements
