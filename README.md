@@ -7,15 +7,21 @@ This tool provides high quantity of data in a snap, giving you a quick view on w
 The domain target is extracted from all the sequences with the structure `[SP] + [TargetDomain] x N` (**warning**: the tool
 doesn't check if there are other domains inside the same sequence, yet).
 
+
 **At the moment this program run exclusively on Linux (tested on Debian 11 and Ubuntu 22.04).** <br>
 See [Future updates](#future-updates) for Mac and Windows.
 
 All the software used are OpenSource.<br>
-**Total memory used**: ~3.5 GB.<br>
-**Multi-core CPU** is suggested.<br>
-**SSD** is suggested.<br>
+
+
+Brivez runs **locally**, ergo **offline**.<br>
+- **Total memory used**: ~3.5 GB<br>
+- **Multi-core CPU** is suggested<br>
+- **SSD** is suggested
 <br>
 <br>
+
+
 # Index #
 - [Suggested use](#suggested-use)<br>
 - [Software requirements](#software-requirements)<br>
