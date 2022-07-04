@@ -1,4 +1,4 @@
-# Brivez - beta 0.1
+# Brivez
 Brivez is a bioinformatic tool which if provided with single/multiple transcriptome.fasta file and profile.hmm domain it returns all the domains found in a single file.fasta (of course there are more in the readme).
 
 **At the moment this program run exclusively on Linux (tested on Debian 11 and Ubuntu 22.04).**
