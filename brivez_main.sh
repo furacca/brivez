@@ -3,6 +3,9 @@
 # A Welcome art, indeed useful
 ##########################################################
 
+
+
+
 echo ""
 echo "  ____  _____  _______      ________ ______"
 echo " |  _ \|  __ \|_   _\ \    / /  ____|___  /"
@@ -19,9 +22,12 @@ echo "Bioinformatic tool - https://github.com/furacca/brivez"
 echo "------ PREPARATIONS -------"
 echo ""
 
+# CLEANUP - delete all folders (and r files) containing "job.tmpd" inside their name
+
+
 # FOLDER CHECK
 echo "[] Folder check"
-folder_found=( $(find . -mindepth 1 -maxdepth 1 -type d ! -path "./Research_number_*" ! -path "./hmm_profile_target*" ! -path "./.*") )
+folder_found=( $(find . -mindepth 1 -maxdepth 1 -type d ! -path "./Research_number_*" ! -path "./00_hmm_profile_target" ! -path "./.*" ! -path "./00_script" ! -path "./.*" ) )
 echo "	*** Have been found ${#folder_found[@]} target folder ***"
 
 for everyfolder in ${folder_found[@]}; do
@@ -49,7 +55,7 @@ echo ""
 
 # HMM FILE CHECK
 echo "[] HMM file check"
-HMM_FILE=( $(ls ./hmm_profile_target) )
+HMM_FILE=( $(ls ./00_hmm_profile_target) )
 echo "	In this analysis will be used $HMM_FILE file"
 echo ""
 
@@ -70,29 +76,32 @@ echo ""
 for everyelement in ${folder_found[@]}; do
 	arrayxyz=( $(echo $everyelement) )
 	for everyelement2 in ${arrayxyz[@]}; do
+		cd $folder_name
+		mkdir $everyelement2
+		cd ..
 		cd $everyelement2
-		trascrittoma=( $(ls) )
+		trascrittoma=( $(find . -type f -name "*.fasta") )
 		echo "------ STARTING THE ANALYSIS FOR THE $everyelement2 FOLDER -------"
 		echo ""
 		echo "[] Deepsig"
 		deepsig -f ./$trascrittoma -o 001_deepsig_output.tsv -k euk
-		cp ../brivez_script01.py ./brivez_script01.py
+		cp ../00_script/brivez_script01.py ./brivez_script01.py
 		echo "[] Executing the ./script01.py"
 		./brivez_script01.py
 		rm ./brivez_script01.py
 		echo "[] Executing hmmsearch"
-		hmmsearch --domtblout 003_hmmer_output_table -E 1e-5 --domE 1e-5 --cpu 10 ../hmm_profile_target/$HMM_FILE ./002_deepsig_sequence_with_SP.fa > /dev/null
-		cp ../brivez_script02.py ./brivez_script02.py
+		hmmsearch --domtblout 003_hmmer_output_table -E 1e-5 --domE 1e-5 --cpu 10 ../00_hmm_profile_target/$HMM_FILE ./002_deepsig_sequence_with_SP.fa > /dev/null
+		cp ../00_script/brivez_script02.py ./brivez_script02.py
 		echo "[] Executing the ./script02.py"
 		./brivez_script02.py
 		rm ./brivez_script02.py
-#		# 001_deepsig_output.tsv
-#		# 002_deepsig_sequence_with_SP.fa.fasta
-#		# 003_hmmer_output_table
-#		# 004_hmmer_output_table_data_parsed.fasta
-#		# 005_pandas_sequences_table.tsv
-#		# 006_sequence_with_SP+Domain_extracted.fa
-#		# 007_domains_of_sequences_with_SP+Domain_extracted.fa
+		mv ./001_deepsig_output.tsv ../$folder_name/$everyelement2/001_deepsig_output.tsv
+		mv ./002_deepsig_sequence_with_SP.fa ../$folder_name/$everyelement2/002_deepsig_sequence_with_SP
+		mv ./003_hmmer_output_table ../$folder_name/$everyelement2/003_hmmer_output_table
+		mv ./004_hmmer_output_table_data_parsed ../$folder_name/$everyelement2/004_hmmer_output_table_data_parsed
+		mv ./005_pandas_sequences_table.tsv ../$folder_name/$everyelement2/005_pandas_sequences_table.tsv
+		mv ./006_sequence_with_SP+Domain_extracted.fa ../$folder_name/$everyelement2/006_sequence_with_SP+Domain_extracted.fa
+		mv ./007_domains_of_sequences_with_SP+Domain_extracted.fa ../$folder_name/$everyelement2/007_domains_of_sequences_with_SP+Domain_extracted.fa
 		cd ..
 	done
 done
@@ -104,6 +113,3 @@ echo ""
 echo "The operation has gone well (or I've missed the bug)."
 echo "Have a good day"
 echo ""
-
-
-

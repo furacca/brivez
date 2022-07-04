@@ -16,8 +16,6 @@ for ognifile in os.listdir("./"):
     if fnmatch.fnmatch(ognifile, "*.fasta"):
         nomedeltrascrittoma = ognifile
 
-print(nomedeltrascrittoma)
-
 header = "target_name,accession,tlen,query_name,accession1,qlen,E-value,score,bias,#,of,c-Evalue,i-Evalue,score,bias," \
          "from,to,START,END,START_envelope,END_envelope,acc,description_of_target\n"
 
