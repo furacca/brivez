@@ -24,7 +24,7 @@ I love checklist.
 5) Check that for every sequence's list you have just one folder
 6) Check that the sequence's list is in .fasta format
 7) Check to have the right environment activated (`conda activate therightenvironment`)
-8) If all is useless, report it on the github section
+8) If all is useless, report it on the GitHub section
 9) Delete the folder (`rm -r ./bravez/*` if you are brave enough)
-10) Redownlaod the project (for exemple with `git clone https://github.com/furacca/bravez`)
+10) Download again the project (for example with `git clone https://github.com/furacca/bravez`)
 11) Follow the "BEFORE running Brivez" checklist
