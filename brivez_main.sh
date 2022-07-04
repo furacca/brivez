@@ -76,23 +76,23 @@ for everyelement in ${folder_found[@]}; do
 		echo ""
 		echo "[] Deepsig"
 		deepsig -f ./$trascrittoma -o 001_deepsig_output.tsv -k euk
-		cp ../from_deepsig_to_fasta.py ./from_deepsig_to_fasta.py
-		echo "[] Executing the ./from_deepsig_to_fasta.py script"
-		./from_deepsig_to_fasta.py
-		rm ./from_deepsig_to_fasta.py
+		cp ../brivez_script01.py ./brivez_script01.py
+		echo "[] Executing the ./script01.py"
+		./brivez_script01.py
+		rm ./brivez_script01.py
 		echo "[] Executing hmmsearch"
-		hmmsearch --domtblout 003_sequences_list_SP+DOMAIN -E 1e-5 --domE 1e-5 --cpu 10 ../hmm_profile_target/$HMM_FILE ./002_sequence_with_SP.fasta > /dev/null
-		cp ../from_domtblout_to_seqfastalist_and_domainsfastalist.py ./from_domtblout_to_seqfastalist_and_domainsfastalist.py
-		echo "[] Exetcuing the ./from_domtblout_to_seqfastalist_and_domainsfastalist.py script"
-		./from_domtblout_to_seqfastalist_and_domainsfastalist.py
-		rm ./from_domtblout_to_seqfastalist_and_domainsfastalist.py
-		# 001_deepsig_output.tsv
-		# 002_sequence_with_SP.fasta
-		# 003_sequences_list_SP+DOMAIN
-		# 004_sequences_list_SP+DOMAIN_extracted.fasta
-		# 005_table_data.tsv
-		# 006_sequences_SP+Domain_Extracted.fasta
-		# 007_domain_sequences_extracted.fasta
+		hmmsearch --domtblout 003_hmmer_output_table -E 1e-5 --domE 1e-5 --cpu 10 ../hmm_profile_target/$HMM_FILE ./002_deepsig_sequence_with_SP.fa > /dev/null
+		cp ../brivez_script02.py ./brivez_script02.py
+		echo "[] Executing the ./script02.py"
+		./brivez_script02.py
+		rm ./brivez_script02.py
+#		# 001_deepsig_output.tsv
+#		# 002_deepsig_sequence_with_SP.fa.fasta
+#		# 003_hmmer_output_table
+#		# 004_hmmer_output_table_data_parsed.fasta
+#		# 005_pandas_sequences_table.tsv
+#		# 006_sequence_with_SP+Domain_extracted.fa
+#		# 007_domains_of_sequences_with_SP+Domain_extracted.fa
 		cd ..
 	done
 done
@@ -101,8 +101,9 @@ done
 echo ""
 echo "------ CONGRATULATIONS -------"
 echo ""
-echo "The operation has gone well (or miss the bug)."
+echo "The operation has gone well (or I've missed the bug)."
 echo "Have a good day"
+echo ""
 
 
 
