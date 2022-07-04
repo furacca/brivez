@@ -13,6 +13,7 @@ All the software used are OpenSource.<br>
 - [Suggested use](#suggested-use)<br>
 - [Software requirements](#software-requirements)<br>
 - [Quickly set up](#quickly-set-up)<br>
+- [First run and checklist](#first-run-and-checklist)<br>
 - [Future updates](#future-updates)<br>
 
 # Suggested use
@@ -49,6 +50,12 @@ Long list short:
 4) **Install [HMMER3](http://hmmer.org/)**
    1) `sudo apt-get install hmmer` (v3.3.2 both on Ubuntu 22.04 and Debian 11)
 
+# First run and checklist
+
+BEFORE ever thinking of runninng Brivez you MUST:
+- Help yourself and delete all the * from the sequences.fasta (you can use )
+- 
+- ascascas
 
 # Future updates
 
