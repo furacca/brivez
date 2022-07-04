@@ -26,7 +26,6 @@ if [ "$1" == "iamsureofthis" ]; then
   echo "  Wiping the log file:"
   rm -f ./log
   echo "  --> Done"
-  echo ""
   echo "  Wiping all the accessory files:"
   find . -type f -name "001_deepsig_output.tsv" -delete
   find . -type f -name "002_deepsig_sequence_with_SP.fa" -delete
@@ -38,9 +37,29 @@ if [ "$1" == "iamsureofthis" ]; then
   find . -type d -name "job.tmpd.*" -delete
   echo "  --> Done"
   echo ""
-  echo "All the files have been wiped out."
-  echo "Bye!"
+  echo "  All the files and folder have been wiped out."
   echo ""
+  echo ""
+  echo "[] Folder's name check"
+  hmm_folder_check=( $(find . -type d -path "./00_hmm_profile_target") )
+  script=( $(find . -type d -path "./00_script") )
+#   Rewrite it with -case- ?
+  if [ "$hmm_folder_check" == "./00_hmm_profile_target" ]; then
+    if [ "$script" == "./00_script" ]; then
+      echo "  ---> Done"
+    else
+      echo " ---------------------- WARNING! --------------------- "
+      echo "The name of ./00_script is chagend. Please, check it."
+      exit
+    fi
+  else
+    echo " ---------------------- WARNING! --------------------- "
+    echo "The name of ./00_hmm_profile_target is chagend. Please, check it."
+    exit
+  fi
+  echo ""
+  echo ""
+
 else
   echo ""
   echo " ---------------------- WARNING! --------------------- "
@@ -48,4 +67,9 @@ else
   echo "A mistake, maybe?"
   echo "-------------------------------------------------------"
   echo ""
+  exit
 fi
+echo "---> EVERYTHING SEEM TO BE OK"
+echo ""
+echo "Have fun!"
+echo ""
