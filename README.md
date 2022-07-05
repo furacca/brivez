@@ -15,8 +15,8 @@ All the software used are OpenSource.<br>
 
 
 Brivez runs **locally**, ergo **offline**.<br>
-- **Total memory used**: ~3.5 GB<br>
 - **Multi-core CPU** is suggested<br>
+- **Total space used**: ~3.5 GB<br>
 - **SSD** is suggested
 <br>
 <br>
@@ -27,7 +27,7 @@ Brivez runs **locally**, ergo **offline**.<br>
 - [Software requirements](#software-requirements)<br>
 - [Quickly set up](#quickly-set-up)<br>
 - [First run and checklist](#first-run-and-checklist)<br>
-- [Avoid the following](#Avoid-the-following)<br>
+- [Avoid the following](#What-to-avoid?)<br>
 - [Future updates](#future-updates)<br>
 
 # Suggested use
@@ -103,7 +103,7 @@ This will overwrite the original file.
 - Delete every output folder created and the log file with<br>
 `./wipe_all.sh`
 
-# Avoid the following
+# What to avoid?
 DO NOT CHANGE/RENAME/MOVE ANY FOLDER/FILE, unless is something that you have added!
 
 
