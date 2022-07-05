@@ -4,10 +4,12 @@ Brivez is a bioinformatic tool thought as Quality of Life's improvement, providi
 giving you a quick view on what you could find inside your transcriptome/sequences' list.
 
 Installation requirments aside, you will need two file:
-  - `domain_profile.hmm` of your interest (or an entire database) -> Inside the 00_hmm_profile_target folder
-  - `Danio_rerio_sequence/s.fasta` -> Inside the 01_Danio_rerio folder
+  - `domain_profile.hmm` of your interest (or an entire database)
+<br> Put it inside the 00_hmm_profile_target folder
+  - `Danio_rerio_sequence/s.fasta`
+<br> Put it inside the 01_Danio_rerio folder
 
-Run ./brivez_main.sh. Done!
+[1] Read the documentation. [2] The first time follow the checklist. [3] Run ./brivez_main.sh. [4] Done!
 
 Every sequence is analyzed by `Deepsig` which is looking for Signal Peptide; 
 the positive matches undergo to `hmmsearch` analysis, creating a table with inside the domain described by the profile.hmm used. In the end every domain found in this way is extracted and saved inside the final output file.fasta.
