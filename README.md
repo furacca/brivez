@@ -13,11 +13,15 @@ See [Future updates](#future-updates) for Mac and Windows.
 
 All the software used are OpenSource.<br>
 
+<table>
+<th>Brivez runs **locally**, ergo **offline**</th>
+<tr><td>
 
-Brivez runs **locally**, ergo **offline**.<br>
 - **Multi-core CPU** is suggested<br>
 - **Total space used**: ~3.5 GB<br>
 - **SSD** is suggested
+</td></tr>
+</table>
 <br>
 <br>
 
@@ -104,7 +108,7 @@ This will overwrite the original file.
 `./wipe_all.sh`
 
 # What to avoid?
-DO NOT CHANGE/RENAME/MOVE ANY FOLDER/FILE, unless is something that you have added!
+**DO NOT CHANGE / RENAME / MOVE ANY FOLDER / FILE**, unless is something that you have added!
 
 
 # Future updates
