@@ -3,7 +3,7 @@
 Brivez is a bioinformatic tool thought as Quality of Life's improvement, providing high quantity of data in a snap, 
 giving you a quick view on what you could find inside your transcriptome/sequences' list.
 
-Installation requirments aside, you will need two file:
+Installation requirements aside, you will need two files:
   - `domain_profile.hmm` of your interest (or an entire database)
 <br> Put it inside the 00_hmm_profile_target folder
   - `Danio_rerio_sequence/s.fasta`
@@ -152,8 +152,8 @@ From the table.output are extracted two kind of coordinates:
 <br> The start and the end of the domain envelope on the sequence. ([read p. 72](http://eddylab.org/software/hmmer/Userguide.pdf))
 
 **By default, Brivez use the env coord**, but it's possible to **change it** on line 43 in ./00_script/brivez_script02.py:
-- change df_selected = df[["target_name", "query_name", "accession1", "START_envelope", "END_envelope"]] <br>
-- with df_selected = df[["target_name", "query_name", "accession1", "START_ali", "END_ali"]]
+- change `df_selected = df[["target_name", "query_name", "accession1", "START_envelope", "END_envelope"]]` <br>
+- with `df_selected = df[["target_name", "query_name", "accession1", "START_ali", "END_ali"]]`
 <br>
 
 #### Useful things to know:
