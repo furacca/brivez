@@ -92,7 +92,7 @@ for everyelement in ${folder_found[@]}; do
 		echo "[] Executing hmmsearch"
 
 #		This line is editable
-		hmmsearch --domtblout 003_hmmer_output_table -E 1e-5 --domE 1e-5 --cpu 10 ../00_hmm_profile_target/$HMM_FILE ./002_deepsig_sequence_with_SP.fa > /dev/null
+		hmmsearch --domtblout 003_hmmer_output_table -E 1e-5 --domE 1e-5 --cpu 6 ../00_hmm_profile_target/$HMM_FILE ./002_deepsig_sequence_with_SP.fa > /dev/null
 
 		cp ../00_script/brivez_script02.py ./brivez_script02.py
 		echo "[] Executing the ./script02.py"
