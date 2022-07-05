@@ -25,11 +25,11 @@ All the software used are OpenSource.<br>
 <br>
 <br>
 
-# Flowchart
-<p align="center"><img src="./brivez_flowchart.png"></p>
+
 
 # Index #
 - [Suggested use](#suggested-use)<br>
+- [Flowchart](#flowchart)<br>
 - [Software requirements](#software-requirements)<br>
 - [Quickly set up](#quickly-set-up)<br>
 - [First run and checklist](#first-run-and-checklist)<br>
@@ -41,6 +41,11 @@ All the software used are OpenSource.<br>
 Brivez is a bioinformatic tool which has been thought as Quality of Life's improvement.
 Its main goal is to extract all the domains sequence inside the proteins, given a sequence target (proteins list or 
 transcriptome) and a ~.hmm profile.
+
+# Flowchart
+<p align="center"><img src="./brivez_flowchart.png"></p>
+
+
 
 
 # Software requirements
