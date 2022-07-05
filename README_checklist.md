@@ -22,13 +22,13 @@ I love checklist.
 -- *music intensifies* - Entering the serious mode --
 
 7) Backup the data that you want to save (maybe some Research_number_X_OUTPUT-FOLDER?)
-8) Run `./wipe_all.sh iamsureofthis` (be really sure) which will: <br>
+8) Run `./brivez_wipe_all.sh iamsureofthis` (be really sure) which will: <br>
    - Delete every Research_number_X_OUTPUT-FOLDER
    - Delete the log file
    - Delete every accessory file EVERYWHERE inside the root
    - Check the name of the essential file
 
 9) If all is useless, report it on the GitHub section (be detailed, please)
-10) Delete the folder (`rm -r ./bravez/*`)
+10) Delete the folder (`rm -r ./brivez/*`)
 11) Download again the project (for example with `git clone https://github.com/furacca/bravez`)
 12) Follow the "BEFORE running Brivez" checklist

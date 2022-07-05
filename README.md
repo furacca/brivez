@@ -49,7 +49,8 @@ All the software used are OpenSource.<br>
 
 
 # Flowchart
-<p align="center"><img src="./brivez_flowchart.png"></p>
+###### _Flowchart realized with to [draw.io](https://github.com/jgraph/drawio)_
+<p align="center"><img src="./flowchart.png"></p>
 
 
 # Software requirements
@@ -125,7 +126,7 @@ This will overwrite the original file.
 
 **06 - CLEAN UP THE WORKSPACE**<br>
 - Delete every output folder created and the log file with<br>
-`./wipe_all.sh`
+`./brivez_wipe_all.sh`
 
 # Avoid the following
 - **DO NOT CHANGE / RENAME / MOVE ANY FOLDER / FILE**, unless is something that you have added!
