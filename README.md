@@ -1,12 +1,17 @@
 <p align="center"><img src="./logo.png"></p>
 
 Brivez is a bioinformatic tool which, if provided with single/multiple transcriptome.fasta file and profile.hmm domain, 
-it returns all the domains found in a single file.fasta (of course there are more in the readme).
+it returns all the domains found in a single file.fasta.
+It has been thought as Quality of Life's improvement, providing high quantity of data in a snap, 
+giving you a quick view on what you could find inside your transcriptome/sequences' list.
 
-This tool provides high quantity of data in a snap, giving you a quick view on what you could find inside your sequences.
-The domain target is extracted from all the sequences with the structure `[SP] + [TargetDomain] x N` (**warning**: the tool
-doesn't check if there are other domains inside the same sequence, yet).
+Every sequence is analyzed by `Deepsig`,looking for Signal Peptide; 
+if they have it the program run a `hmmsearch` looking for a domain in the sequence, following the criteria inside ~.hmm file.
+In the end every domain inside the sequences presenting the structure `[SP] + [TargetDomain] x N` have been extracted inside a ~.fasta file.
 
+
+- **warning**: the tool strictly check if there are the domains described inside ~.hmm.<br> 
+Both SP+DomainTarget and SP+DomainTarget+AntherKindOfDomain are a positive match.
 
 **At the moment this program run exclusively on Linux (tested on Debian 11 and Ubuntu 22.04).** <br>
 See [Future updates](#future-updates) for Mac and Windows.
@@ -17,18 +22,14 @@ All the software used are OpenSource.<br>
 <th>Brivez runs locally, ergo offline</th>
 <tr><td>
 
-- **Multi-core CPU** is suggested<br>
-- **Total space used**: ~3.5 GB<br>
+- **Multi-core CPU** is suggested
+- **Total space used**: ~3.5 GB
 - **SSD** is suggested
 </td></tr>
 </table>
-<br>
-<br>
-
 
 
 # Index #
-- [Suggested use](#suggested-use)<br>
 - [Flowchart](#flowchart)<br>
 - [Software requirements](#software-requirements)<br>
 - [Quickly set up](#quickly-set-up)<br>
@@ -37,15 +38,9 @@ All the software used are OpenSource.<br>
 - [HMMER tool in details](#HMMER-tool-in-details)<br>
 - [Future updates](#future-updates)<br>
 
-# Suggested use
-Brivez is a bioinformatic tool which has been thought as Quality of Life's improvement.
-Its main goal is to extract all the domains sequence inside the proteins, given a sequence target (proteins list or 
-transcriptome) and a ~.hmm profile.
 
 # Flowchart
 <p align="center"><img src="./brivez_flowchart.png"></p>
-
-
 
 
 # Software requirements
