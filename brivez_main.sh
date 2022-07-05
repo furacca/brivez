@@ -63,7 +63,7 @@ echo ""
 # OUTPUT FOLDER CREATION
 echo "[] Organizing the output folder"
 mkdir "$folder_name"
-echo "	The output folder $folder_name has been created. It contains two output file:"
+echo "	The output folder $folder_name has been created."
 cd $folder_name
 touch 001_all_sequences_extracted.fasta
 echo "		--> Created 001_all_sequences_extracted.fasta file in the folder"
@@ -71,8 +71,8 @@ touch 002_all_domains_extracted.fasta
 cd ..
 echo "		--> Created 002_all_domains_extracted.fasta file in the folder"
 echo ""
-\
-# ANALYSIS TIME
+
+# ---- ANALYSIS TIME -----
 for everyelement in ${folder_found[@]}; do
 	arrayxyz=( $(echo $everyelement) )
 	for everyelement2 in ${arrayxyz[@]}; do
@@ -109,7 +109,15 @@ for everyelement in ${folder_found[@]}; do
 	done
 done
 
-# CONGRATULATIONS
+# ---- MUSCLE TIME -----
+echo ""
+echo "------ STARTING THE MUSCLE ANALYSIS INSIDE $folder_name -------"
+cd $folder_name
+echo "	Runing MUSCLE"
+muscle -align 002_all_domains_extracted.fasta -output 002_msa_muscle.fasta
+echo "  --> Done"
+
+# # ---- CONGRATULATION TIME -----
 echo ""
 echo "------ CONGRATULATIONS -------"
 echo ""

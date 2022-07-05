@@ -25,13 +25,15 @@ All the software used are OpenSource.<br>
 <br>
 <br>
 
-
+# Flowchart
+<p align="center"><img src="./brivez_flowchart.png"></p>
 # Index #
 - [Suggested use](#suggested-use)<br>
 - [Software requirements](#software-requirements)<br>
 - [Quickly set up](#quickly-set-up)<br>
 - [First run and checklist](#first-run-and-checklist)<br>
 - [Avoid the following](#avoid-the-following)<br>
+- [HMMER tool in details](#HMMER-tool-in-details)<br>
 - [Future updates](#future-updates)<br>
 
 # Suggested use
@@ -47,7 +49,8 @@ Long list short:
   - Deepsig (~50 MB)
   - Pandas (~15 MB)
   - Bio-conda 
-  - fnmatch (samtools -~1 MB)
+  - fnmatch (samtools ~1 MB)
+  - MUSCLE (~ 300 KB)
 - HMMER3 v3.3.2 (~ 20 MB)
 
 # Quickly set up
@@ -59,13 +62,13 @@ Long list short:
    Now in your terminal you will see something like `(base) user@host:~$`: the `base` indicates the name of the active environment.  It's possible to create an environment _ad hoc_ running in the terminal: `conda create - n name_of_the_environment`. To see all the env use `conda env list`.
    4) Choose the environment with `conda activate name_of_the_environment` (`conda deactivate [...]` to close the active environment).
 
-**---- By this point be sure having activate the right environment! ----**
+**---- By this point be sure having activated the right environment! ----**
 
 **02 - Install in Conda some stuff:**<br>
    1) conda config --add channels bioconda
-   2) conda install pandas
-   3) conda install -c bioconda samtools
-   4) conda install -c conda-forge dpath
+   2) conda install -c bioconda samtools
+   3) conda install -c conda-forge dpath
+   4) conda install pandas
 
 **03 - Install the predictor of signal peptides, [**DeepSig**](https://github.com/BolognaBiocomp/deepsig)**<br>
    1) Just as described on its site, use <br>`conda install -c bioconda deepsig`
@@ -74,7 +77,10 @@ Long list short:
    1) Just as described on its site, use<br>`sudo apt-get install hmmer` (v3.3.2 both on Ubuntu 22.04 and Debian 11).
 <br> Otherwise is installable following the [official documentation](http://hmmer.org/documentation.html)
 
-**05 - Download Brivez**<br>
+**05 - Install the multiple alignments of biological sequences [**MUSCLE**](https://github.com/rcedgar/muscle)**<br>
+   1) Just as described [here](https://anaconda.org/bioconda/muscle), use <br>`conda install -c bioconda muscle`
+
+**06 - Download Brivez**<br>
    1) Download the Brivez folder with<br>
 `git clone https://github.com/furacca/bravez`
 or whatever way you prefer
@@ -113,7 +119,7 @@ This will overwrite the original file.
 # Avoid the following
 - **DO NOT CHANGE / RENAME / MOVE ANY FOLDER / FILE**, unless is something that you have added!
 
-# HMMER tool
+# HMMER tool in details
 Brivez run hmmsearch with the following arguments:<br>
 `hmmsearch --domtblout table.output -E 1e-5 --domE 1e-5 --cpu 2 hmmfile target.fastsa`<br>
 
@@ -126,11 +132,6 @@ This **can be edited** at **line 95** inside `brivez_man.sh`.
 - `--cpu 2`
 <br> Set the number of parallel worker threads to N. On multicore machines, the defaults is two. Can be use also --mpi in alternative ([read p. 107](http://eddylab.org/software/hmmer/Userguide.pdf)).
 
-Things to know:
-- `hmmpress` is useful only if used with `hmmscan` ([read p. 97](http://eddylab.org/software/hmmer/Userguide.pdf))
-- `MEA` Maximum Expected Accuracy
-- `envelope` When HMMER identifies domains, it identifies what it calls an envelope bounding where the domain’s alignment most probably lies. The envelope is almost always a little wider than what HMMER chooses to show as a
-reasonably confident alignment.
 
 From the table.output are extracted two kind of coordinates:
 - `ali coord`
@@ -138,10 +139,16 @@ From the table.output are extracted two kind of coordinates:
 - `env coord`
 <br> The start and the end of the domain envelope on the sequence. ([read p. 72](http://eddylab.org/software/hmmer/Userguide.pdf))
 
-**By default Brivez use the env coord**, but it's possible to **change it** on line 43 in ./00_script/brivez_script02.py:
+**By default, Brivez use the env coord**, but it's possible to **change it** on line 43 in ./00_script/brivez_script02.py:
 - change df_selected = df[["target_name", "query_name", "accession1", "START_envelope", "END_envelope"]] <br>
 - with df_selected = df[["target_name", "query_name", "accession1", "START_ali", "END_ali"]]
 <br>
+
+Useful things to know:
+- `hmmpress` is useful only if used with `hmmscan` ([read p. 97](http://eddylab.org/software/hmmer/Userguide.pdf))
+- `MEA` Maximum Expected Accuracy
+- `envelope` When HMMER identifies domains, it identifies what it calls an envelope bounding where the domain’s alignment most probably lies. The envelope is almost always a little wider than what HMMER chooses to show as a
+reasonably confident alignment.
 
 
 
@@ -149,13 +156,13 @@ From the table.output are extracted two kind of coordinates:
 
 **TOP PRIORITY**
 - Reorganizing commenting for all the code
-- Output file ready to be elaborated with Muscle/TCoffee and MrBayes
+- Output file ready to be elaborated with Muscle/TCoffee and MrBayes (.nexus)
 
 **MEDIUM PRIORITY**
 - Extracted list of all SP (008_*.fa maybe?)
 - Create checkpoint to have multiple feedbacks while the program is ongoing (and create a REPORT!)
 
 **LOW PRIORITY**
-- Check some solution for Mac and Windows 10 - 11(W. subsystem for Linux)
+- Check some solution for Mac and Windows 10 - 11(Windows subsystem for Linux)
 - Possibility to disable Deepsig (sequences already selected or something else)
 - Choose multiple domains 

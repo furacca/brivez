@@ -49,12 +49,12 @@ if [ "$1" == "iamsureofthis" ]; then
       echo "  ---> Done"
     else
       echo " ---------------------- WARNING! --------------------- "
-      echo "The name of ./00_script is chagend. Please, check it."
+      echo "The name of ./00_script is changed. Please, check it."
       exit
     fi
   else
     echo " ---------------------- WARNING! --------------------- "
-    echo "The name of ./00_hmm_profile_target is chagend. Please, check it."
+    echo "The name of ./00_hmm_profile_target is changed. Please, check it."
     exit
   fi
   echo ""
@@ -63,13 +63,13 @@ if [ "$1" == "iamsureofthis" ]; then
 else
   echo ""
   echo " ---------------------- WARNING! --------------------- "
-  echo "The secret agreement word to delete everthing is wrong."
+  echo "The secret agreement word to delete everything is wrong."
   echo "A mistake, maybe?"
   echo "-------------------------------------------------------"
   echo ""
   exit
 fi
-echo "---> EVERYTHING SEEM TO BE OK"
+echo "---> EVERYTHING SEEMS TO BE ALRIGHT, but I am a mere script"
 echo ""
 echo "Have fun!"
 echo ""
