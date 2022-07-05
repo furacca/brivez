@@ -27,6 +27,7 @@ All the software used are OpenSource.<br>
 
 # Flowchart
 <p align="center"><img src="./brivez_flowchart.png"></p>
+
 # Index #
 - [Suggested use](#suggested-use)<br>
 - [Software requirements](#software-requirements)<br>
