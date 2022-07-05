@@ -15,16 +15,20 @@ I love checklist.
 
 ## Checklist - ERRORS EVERYWHERE!
 1) Keep calm
-2) Save all the data in Research_number_X_OUTPUT-FOLDER that you need
-4) Run `./wipe_all.sh iamsureofthis` (be really sure) which: <br>
+2) Check that for every sequence's list you have just one folder
+3) Check that the sequence's list is in .fasta format
+4) Check to have the right environment activated (`conda activate therightenvironment`)
+
+-- *music intensifies* - Entering the serious mode --
+
+7) Backup the data that you want to save (maybe some Research_number_X_OUTPUT-FOLDER?)
+8) Run `./wipe_all.sh iamsureofthis` (be really sure) which will: <br>
    - Delete every Research_number_X_OUTPUT-FOLDER
    - Delete the log file
    - Delete every accessory file EVERYWHERE inside the root
    - Check the name of the essential file
-5) Check that for every sequence's list you have just one folder
-6) Check that the sequence's list is in .fasta format
-7) Check to have the right environment activated (`conda activate therightenvironment`)
-8) If all is useless, report it on the GitHub section
-9) Delete the folder (`rm -r ./bravez/*` if you are brave enough)
-10) Download again the project (for example with `git clone https://github.com/furacca/bravez`)
-11) Follow the "BEFORE running Brivez" checklist
+
+9) If all is useless, report it on the GitHub section (be detailed, please)
+10) Delete the folder (`rm -r ./bravez/*`)
+11) Download again the project (for example with `git clone https://github.com/furacca/bravez`)
+12) Follow the "BEFORE running Brivez" checklist

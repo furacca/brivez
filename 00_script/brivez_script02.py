@@ -17,7 +17,7 @@ for ognifile in os.listdir("./"):
         nomedeltrascrittoma = ognifile
 
 header = "target_name,accession,tlen,query_name,accession1,qlen,E-value,score,bias,#,of,c-Evalue,i-Evalue,score,bias," \
-         "from,to,START,END,START_envelope,END_envelope,acc,description_of_target\n"
+         "from,to,START_ali,END_ali,START_envelope,END_envelope,acc,description_of_target\n"
 
 with open("004_hmmer_output_table_data_parsed", "w") as new_file:
     new_file.write(header)

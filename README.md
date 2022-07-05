@@ -14,7 +14,7 @@ See [Future updates](#future-updates) for Mac and Windows.
 All the software used are OpenSource.<br>
 
 <table>
-<th>Brivez runs **locally**, ergo **offline**</th>
+<th>Brivez runs locally, ergo offline</th>
 <tr><td>
 
 - **Multi-core CPU** is suggested<br>
@@ -31,7 +31,7 @@ All the software used are OpenSource.<br>
 - [Software requirements](#software-requirements)<br>
 - [Quickly set up](#quickly-set-up)<br>
 - [First run and checklist](#first-run-and-checklist)<br>
-- [Avoid the following](#What-to-avoid?)<br>
+- [Avoid the following](#avoid-the-following)<br>
 - [Future updates](#future-updates)<br>
 
 # Suggested use
@@ -59,6 +59,8 @@ Long list short:
    Now in your terminal you will see something like `(base) user@host:~$`: the `base` indicates the name of the active environment.  It's possible to create an environment _ad hoc_ running in the terminal: `conda create - n name_of_the_environment`. To see all the env use `conda env list`.
    4) Choose the environment with `conda activate name_of_the_environment` (`conda deactivate [...]` to close the active environment).
 
+**---- By this point be sure having activate the right environment! ----**
+
 **02 - Install in Conda some stuff:**<br>
    1) conda config --add channels bioconda
    2) conda install pandas
@@ -69,7 +71,8 @@ Long list short:
    1) Just as described on its site, use <br>`conda install -c bioconda deepsig`
 
 **04 - Install [HMMER3](http://hmmer.org/)**<br>
-   1) Just as described on its site, use<br>`sudo apt-get install hmmer` (v3.3.2 both on Ubuntu 22.04 and Debian 11)
+   1) Just as described on its site, use<br>`sudo apt-get install hmmer` (v3.3.2 both on Ubuntu 22.04 and Debian 11).
+<br> Otherwise is installable following the [official documentation](http://hmmer.org/documentation.html)
 
 **05 - Download Brivez**<br>
    1) Download the Brivez folder with<br>
@@ -107,8 +110,39 @@ This will overwrite the original file.
 - Delete every output folder created and the log file with<br>
 `./wipe_all.sh`
 
-# What to avoid?
-**DO NOT CHANGE / RENAME / MOVE ANY FOLDER / FILE**, unless is something that you have added!
+# Avoid the following
+- **DO NOT CHANGE / RENAME / MOVE ANY FOLDER / FILE**, unless is something that you have added!
+
+# HMMER tool
+Brivez run hmmsearch with the following arguments:<br>
+`hmmsearch --domtblout table.output -E 1e-5 --domE 1e-5 --cpu 2 hmmfile target.fastsa`<br>
+
+This **can be edited** at **line 95** inside `brivez_man.sh`. 
+
+- `-E 1e-5`
+<br> Report target sequences with an E-value of <= X. The default is 10.0 ([read p. 104](http://eddylab.org/software/hmmer/Userguide.pdf)).
+- `--domE 1e-5`
+<br> For target sequences that have already satisfied the per-profile reporting threshold, report individual domains with a conditional E-value of <= X. The default is 10.0 ([read p. 104](http://eddylab.org/software/hmmer/Userguide.pdf)).
+- `--cpu 2`
+<br> Set the number of parallel worker threads to N. On multicore machines, the defaults is two. Can be use also --mpi in alternative ([read p. 107](http://eddylab.org/software/hmmer/Userguide.pdf)).
+
+Things to know:
+- `hmmpress` is useful only if used with `hmmscan` ([read p. 97](http://eddylab.org/software/hmmer/Userguide.pdf))
+- `MEA` Maximum Expected Accuracy
+- `envelope` When HMMER identifies domains, it identifies what it calls an envelope bounding where the domain’s alignment most probably lies. The envelope is almost always a little wider than what HMMER chooses to show as a
+reasonably confident alignment.
+
+From the table.output are extracted two kind of coordinates:
+- `ali coord`
+<br> The start of the MEA alignment of this domain with respect to the sequence ([read p. 72](http://eddylab.org/software/hmmer/Userguide.pdf))
+- `env coord`
+<br> The start and the end of the domain envelope on the sequence. ([read p. 72](http://eddylab.org/software/hmmer/Userguide.pdf))
+
+**By default Brivez use the env coord**, but it's possible to **change it** on line 43 in ./00_script/brivez_script02.py:
+- change df_selected = df[["target_name", "query_name", "accession1", "START_envelope", "END_envelope"]] <br>
+- with df_selected = df[["target_name", "query_name", "accession1", "START_ali", "END_ali"]]
+<br>
+
 
 
 # Future updates
