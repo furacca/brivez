@@ -1,13 +1,20 @@
 <p align="center"><img src="./logo.png"></p>
 
-Brivez is a bioinformatic tool which, if provided with single/multiple transcriptome.fasta file and profile.hmm domain, 
-it returns all the domains found in a single file.fasta.
-It has been thought as Quality of Life's improvement, providing high quantity of data in a snap, 
+Brivez is a bioinformatic tool thought as Quality of Life's improvement, providing high quantity of data in a snap, 
 giving you a quick view on what you could find inside your transcriptome/sequences' list.
 
-Every sequence is analyzed by `Deepsig`,looking for Signal Peptide; 
-if they have it the program run a `hmmsearch` looking for a domain in the sequence, following the criteria inside ~.hmm file.
-In the end every domain inside the sequences presenting the structure `[SP] + [TargetDomain] x N` have been extracted inside a ~.fasta file.
+Installation requirments aside, you will need two file:
+  - `domain_profile.hmm` of your interest (or an entire database) -> Inside the 00_hmm_profile_target folder
+  - `Danio_rerio_sequence/s.fasta` -> Inside the 01_Danio_rerio folder
+
+Run ./brivez_main.sh. Done!
+
+Every sequence is analyzed by `Deepsig` which is looking for Signal Peptide; 
+the positive matches undergo to `hmmsearch` analysis, creating a table with inside the domain described by the profile.hmm used. In the end every domain found in this way is extracted and saved inside the final output file.fasta.
+
+
+- **warning**: the tool strictly check if there are the domains described inside ~.hmm.<br> 
+The sequence SP+DomainTarget+DomainNotDescribedByHmmFile is a positive match (but only the first domain is going to be extracted).have been extracted inside a ~.fasta file.
 
 
 - **warning**: the tool strictly check if there are the domains described inside ~.hmm.<br> 
@@ -45,14 +52,15 @@ All the software used are OpenSource.<br>
 
 # Software requirements
 Long list short:
-- Conda (~minimum 3 GB)
+- Conda (minimum ~3 GB)
 - Environment inside Conda with:
   - Deepsig (~50 MB)
   - Pandas (~15 MB)
-  - Bio-conda 
+  - Bio-conda (channel)
   - fnmatch (samtools ~1 MB)
-  - MUSCLE (~ 300 KB)
-- HMMER3 v3.3.2 (~ 20 MB)
+  - MUSCLE (~300 KB)
+- HMMER3 v3.3.2 (~20 MB)
+- Brivez (~1 MB)
 
 # Quickly set up
 
@@ -136,7 +144,7 @@ This **can be edited** at **line 95** inside `brivez_man.sh`.
 
 From the table.output are extracted two kind of coordinates:
 - `ali coord`
-<br> The start of the MEA alignment of this domain with respect to the sequence ([read p. 72](http://eddylab.org/software/hmmer/Userguide.pdf))
+<br> The start of the [MEA](#useful-things-to-know) alignment of this domain with respect to the sequence ([read p. 72](http://eddylab.org/software/hmmer/Userguide.pdf))
 - `env coord`
 <br> The start and the end of the domain envelope on the sequence. ([read p. 72](http://eddylab.org/software/hmmer/Userguide.pdf))
 
@@ -145,7 +153,7 @@ From the table.output are extracted two kind of coordinates:
 - with df_selected = df[["target_name", "query_name", "accession1", "START_ali", "END_ali"]]
 <br>
 
-Useful things to know:
+#### Useful things to know:
 - `hmmpress` is useful only if used with `hmmscan` ([read p. 97](http://eddylab.org/software/hmmer/Userguide.pdf))
 - `MEA` Maximum Expected Accuracy
 - `envelope` When HMMER identifies domains, it identifies what it calls an envelope bounding where the domain’s alignment most probably lies. The envelope is almost always a little wider than what HMMER chooses to show as a
@@ -164,6 +172,6 @@ reasonably confident alignment.
 - Create checkpoint to have multiple feedbacks while the program is ongoing (and create a REPORT!)
 
 **LOW PRIORITY**
-- Check some solution for Mac and Windows 10 - 11(Windows subsystem for Linux)
-- Possibility to disable Deepsig (sequences already selected or something else)
-- Choose multiple domains 
+- Check some solution for Mac and Windows 10 - 11 (with Windows subsystem for Linux)
+- Choose multiple domains (multiple .hmm file, auto-reading the 00_hhm~~ folder content)
+- Choose the sequences with SP+DomainOfInterest, avoiding SP+DomainOfInterest+AnotherDomain (needing full Pfam database)
