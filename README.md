@@ -34,6 +34,8 @@ All the software used are OpenSource.<br>
 - **Multi-core CPU** is suggested
 - **Total space used**: ~3.5 GB
 - **SSD** is suggested
+- **16 GB RAM** is suggested
+<br><br> The more, the better
 </td></tr>
 </table>
 

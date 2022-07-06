@@ -111,4 +111,4 @@ with open(nome_file, "a") as extraction_part4:
     for everyelement in dict_seq:
         domain = str(dict_seq[everyelement][5])
         extraction_part4.write(
-            f">{dict_seq[everyelement][0]}-{dict_seq[everyelement][1]}-from {dict_seq[everyelement][3]}to{dict_seq[everyelement][4]}\n{domain[int(dict_seq[everyelement][3]):int(dict_seq[everyelement][4])]}\n")
+            f">{dict_seq[everyelement][0]}-{dict_seq[everyelement][1]}-from{dict_seq[everyelement][3]}to{dict_seq[everyelement][4]}\n{domain[int(dict_seq[everyelement][3]):int(dict_seq[everyelement][4])]}\n")
