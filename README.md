@@ -22,7 +22,7 @@ The sequence SP+DomainTarget+DomainNotDescribedByHmmFile is a positive match (bu
 - **warning**: the tool strictly check if there are the domains described inside ~.hmm.<br> 
 Both SP+DomainTarget and SP+DomainTarget+AntherKindOfDomain are a positive match.
 
-**At the moment this program run exclusively on Linux (tested on Debian 11 and Ubuntu 22.04).** <br>
+**At the moment this program runs exclusively on Linux (tested on Debian 11 and Ubuntu 22.04).** <br>
 See [Future updates](#future-updates) for Mac and Windows.
 
 All the software used are OpenSource.<br>
