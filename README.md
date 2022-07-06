@@ -37,6 +37,8 @@ All the software used are OpenSource.<br>
 </td></tr>
 </table>
 
+# Known problem
+- Muscle v5 and Muscle on EBI server give two complete different alignment. Unfortunately, the Muscle v5 alignment is the worse one.
 
 # Index #
 - [Flowchart](#flowchart)<br>
@@ -152,8 +154,8 @@ From the table.output are extracted two kind of coordinates:
 <br> The start and the end of the domain envelope on the sequence. ([read p. 72](http://eddylab.org/software/hmmer/Userguide.pdf))
 
 **By default, Brivez use the env coord**, but it's possible to **change it** on line 43 in ./00_script/brivez_script02.py:
-- change `df_selected = df[["target_name", "query_name", "accession1", "START_envelope", "END_envelope"]]` <br>
-- with `df_selected = df[["target_name", "query_name", "accession1", "START_ali", "END_ali"]]`
+- change `df_selected = df[["target_name", "query_name", "accession1", "START_ali", "END_ali"]]` <br>
+- with `df_selected = df[["target_name", "query_name", "accession1", "START_envelope", "END_envelope"]]`
 <br>
 
 #### Useful things to know:

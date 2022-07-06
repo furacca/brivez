@@ -40,7 +40,7 @@ with open("003_hmmer_output_table", "r") as file:
                 new_file.write(a)
 
 df = pd.read_csv("004_hmmer_output_table_data_parsed")
-df_selected = df[["target_name", "query_name", "accession1", "START_envelope", "END_envelope"]]
+df_selected = df[["target_name", "query_name", "accession1", "START_ali", "END_ali"]]
 df_selected.to_csv("005_pandas_sequences_table.tsv", sep="\t")
 
 temp_list_of_sequence = []
@@ -103,7 +103,7 @@ with open("007_domains_of_sequences_with_SP+Domain_extracted.fa", "a") as extrac
     for everyelement in dict_seq:
         domain = str(dict_seq[everyelement][5])
         extraction_part3.write(
-            f">{dict_seq[everyelement][0]} - {dict_seq[everyelement][1]} - from {dict_seq[everyelement][3]} to {dict_seq[everyelement][4]}\n{domain[int(dict_seq[everyelement][3]):int(dict_seq[everyelement][4])]}\n")
+            f">{dict_seq[everyelement][0]}-{dict_seq[everyelement][1]}-from{dict_seq[everyelement][3]}to{dict_seq[everyelement][4]}\n{domain[int(dict_seq[everyelement][3]):int(dict_seq[everyelement][4])]}\n")
 
 nome_file = f"../Research_number_{counter_log2[:-1]}_OUTPUT-FOLDER/002_all_domains_extracted.fasta"
 
@@ -111,4 +111,4 @@ with open(nome_file, "a") as extraction_part4:
     for everyelement in dict_seq:
         domain = str(dict_seq[everyelement][5])
         extraction_part4.write(
-            f">{dict_seq[everyelement][0]} - {dict_seq[everyelement][1]} - from {dict_seq[everyelement][3]} to {dict_seq[everyelement][4]}\n{domain[int(dict_seq[everyelement][3]):int(dict_seq[everyelement][4])]}\n")
+            f">{dict_seq[everyelement][0]}-{dict_seq[everyelement][1]}-from {dict_seq[everyelement][3]}to{dict_seq[everyelement][4]}\n{domain[int(dict_seq[everyelement][3]):int(dict_seq[everyelement][4])]}\n")
