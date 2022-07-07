@@ -169,13 +169,14 @@ reasonably confident alignment.
 
 **TOP PRIORITY**
 - Reorganizing commenting for all the code
-- Output file ready to be elaborated with Muscle/TCoffee and MrBayes (.nexus)
+- Output file ready to be elaborated with Muscle/TCoffee and MrBayes (alignment.fasta/.clw, sample.nexus)
 
 **MEDIUM PRIORITY**
 - Extracted list of all SP (008_*.fa maybe?)
 - Create checkpoint to have multiple feedbacks while the program is ongoing (and create a REPORT!)
+- Rename the sequences (maybe using the folder's name for the root?)
 
-**LOW PRIORITY**
+_**LOW PRIORITY**_
 - Check some solution for Mac and Windows 10 - 11 (with Windows subsystem for Linux)
 - Choose multiple domains (multiple .hmm file, auto-reading the 00_hhm~~ folder content)
 - Choose the sequences with SP+DomainOfInterest, avoiding SP+DomainOfInterest+AnotherDomain (needing full Pfam database)
