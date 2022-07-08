@@ -12,7 +12,7 @@ Installation requirements aside, you will need two files:
 [1] Read the documentation. [2] The first time follow the checklist. [3] Run ./brivez_main.sh. [4] Done!
 
 Every sequence is analyzed by `Deepsig` which is looking for Signal Peptide; 
-the positive matches undergo to `hmmsearch` analysis, creating a table with inside the domain described by the profile.hmm used. In the end every domain found in this way is extracted and saved inside the final output file.fasta.
+the positive matches undergo to `hmmsearch` analysis, creating a table with inside the domain described by the profile.hmm used. In the end every domain found in this way is extracted and saved inside the final output file.fasta (look at the flowchart).
 
 
 - **warning**: the tool strictly check if there are the domains described inside ~.hmm.<br> 
@@ -22,22 +22,22 @@ The sequence SP+DomainTarget+DomainNotDescribedByHmmFile is a positive match (bu
 **At the moment this program runs exclusively on Linux (tested on Debian 11 and Ubuntu 22.04).** <br>
 See [Future updates](#future-updates) for Mac and Windows.
 
-All the software used are OpenSource.<br>
+All the software used are **OpenSource**.<br>
 
 <table>
 <th>Brivez runs locally, ergo offline</th>
 <tr><td>
 
-- **Multi-core CPU** is suggested
-- **Total space used**: ~3.5 GB
-- **SSD** is suggested
-- **16 GB RAM** is suggested
+- Multi-core CPU is suggested
+- Total space used: ~3.5 GB
+- SSD is suggested
+- 16 GB RAM is suggested
 <br><br> The more, the better
 </td></tr>
 </table>
 
 # Known problem
-- Muscle v5 and Muscle on EBI server give two complete different alignment. Unfortunately, the Muscle v5 alignment is the worse one.
+- Muscle v5 and Muscle on EBI server give two complete different alignments. Unfortunately, the Muscle v5 alignment is the worse one. Improvement attended for the next update.
 
 # Index #
 - [Flowchart](#flowchart)<br>
@@ -174,7 +174,7 @@ reasonably confident alignment.
 **MEDIUM PRIORITY**
 - Extracted list of all SP (008_*.fa maybe?)
 - Create checkpoint to have multiple feedbacks while the program is ongoing (and create a REPORT!)
-- Rename the sequences (maybe using the folder's name for the root?)
+- Rename the sequences (maybe using the folder's name for the root?)(write down a guide)
 
 _**LOW PRIORITY**_
 - Check some solution for Mac and Windows 10 - 11 (with Windows subsystem for Linux)

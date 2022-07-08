@@ -67,6 +67,47 @@ with open("005_pandas_sequences_table.tsv", "r") as file_tsv:
 # 1: ['sp|P04275|VWF_HUMAN', 'vwA_MSA', 'empty', '1485', '1657'], 2: ['sp|P04275|VWF_HUMAN', 'vwA_MSA', 'empty',
 # '1667', '1870']}
 
+
+
+# EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+
+name_list_of_all_seq = []
+char_to_remove = 0
+
+with open(nomedeltrascrittoma, "r") as file_fasta:
+    for everysequence in SeqIO.parse(file_fasta, "fasta"):
+        name_list_of_all_seq.append(everysequence.id)
+
+if len(name_list_of_all_seq) == 1:
+    pass
+else:
+    # Guardo la lunghezza minima delle sequenze
+    word_len = 100
+    for everyword in name_list_of_all_seq:
+        if len(everyword) < word_len:
+            word_len = len(everyword)
+        else:
+            pass
+    # Calcolo quante lettere ci sono da eliminare
+
+    a = 0
+    for everytime in range(0, word_len):
+        char_check = []
+
+        for everyelement in name_list_of_all_seq:
+            if everyelement[a] in char_check:
+                pass
+            else:
+                char_check.append(everyelement[a])
+
+        if len(char_check) == 1:
+            char_to_remove += 1
+        a += 1
+
+# EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+
+root = nomedeltrascrittoma.replace(".fasta", "")
+
 with open(nomedeltrascrittoma, "r") as file_fasta:
     for record in SeqIO.parse(file_fasta, "fasta"):
         for everyelement in dict_seq:
@@ -81,7 +122,7 @@ with open("006_sequence_with_SP+Domain_extracted.fa", "a") as extraction_part2:
         if dict_seq[everyelement][0] in seq_already_written:
             pass
         else:
-            extraction_part2.write(f">{dict_seq[everyelement][0]}\n{dict_seq[everyelement][5]}\n\n")
+            extraction_part2.write(f">{root}_{dict_seq[everyelement][0][char_to_remove:]}\n{dict_seq[everyelement][5]}\n\n")
             seq_already_written.append(dict_seq[everyelement][0])
 
 # Reading the log
@@ -96,14 +137,14 @@ with open(f"../Research_number_{counter_log2[:-1]}_OUTPUT-FOLDER/001_all_sequenc
         if dict_seq[everyelement][0] in seq_already_written:
             pass
         else:
-            extraction_part2.write(f">{dict_seq[everyelement][0]}\n{dict_seq[everyelement][5]}\n\n")
+            extraction_part2.write(f">{root}_{dict_seq[everyelement][0][char_to_remove:]}\n{dict_seq[everyelement][5]}\n\n")
             seq_already_written.append(dict_seq[everyelement][0])
 
 with open("007_domains_of_sequences_with_SP+Domain_extracted.fa", "a") as extraction_part3:
     for everyelement in dict_seq:
         domain = str(dict_seq[everyelement][5])
         extraction_part3.write(
-            f">{dict_seq[everyelement][0]}-{dict_seq[everyelement][1]}-from{dict_seq[everyelement][3]}to{dict_seq[everyelement][4]}\n{domain[int(dict_seq[everyelement][3]):int(dict_seq[everyelement][4])]}\n")
+            f">{root}_{dict_seq[everyelement][0][char_to_remove:]}-{dict_seq[everyelement][1]}-from{dict_seq[everyelement][3]}to{dict_seq[everyelement][4]}\n{domain[int(dict_seq[everyelement][3]):int(dict_seq[everyelement][4])]}\n")
 
 nome_file = f"../Research_number_{counter_log2[:-1]}_OUTPUT-FOLDER/002_all_domains_extracted.fasta"
 
@@ -111,4 +152,6 @@ with open(nome_file, "a") as extraction_part4:
     for everyelement in dict_seq:
         domain = str(dict_seq[everyelement][5])
         extraction_part4.write(
-            f">{dict_seq[everyelement][0]}-{dict_seq[everyelement][1]}-from{dict_seq[everyelement][3]}to{dict_seq[everyelement][4]}\n{domain[int(dict_seq[everyelement][3]):int(dict_seq[everyelement][4])]}\n")
+            f">{root}_{dict_seq[everyelement][0][char_to_remove:]}-{dict_seq[everyelement][1]}-from{dict_seq[everyelement][3]}to{dict_seq[everyelement][4]}\n{domain[int(dict_seq[everyelement][3]):int(dict_seq[everyelement][4])]}\n")
+
+
