@@ -36,7 +36,7 @@ All the software used are **OpenSource**.<br>
 </td></tr>
 </table>
 
-# Known problem
+# Known problems
 - Muscle v5 and Muscle on EBI server give two complete different alignments. Unfortunately, the Muscle v5 alignment is the worse one. Improvement attended for the next update.
 
 # Index #
