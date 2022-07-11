@@ -16,7 +16,7 @@ the positive matches undergo to `hmmsearch` analysis, creating a table with insi
 
 
 - **warning**: the tool strictly check if there are the domains described inside ~.hmm.<br> 
-The sequence SP+DomainTarget+DomainNotDescribedByHmmFile is a positive match (but only the first domain is going to be extracted).have been extracted inside a ~.fasta file.
+The sequence SP+DomainTarget+DomainNotDescribedByHmmFile is a positive match (but only the first domain is going to be extracted) have been extracted inside a ~.fasta file.
 
 
 **At the moment this program runs exclusively on Linux (tested on Debian 11 and Ubuntu 22.04).** <br>

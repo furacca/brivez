@@ -26,7 +26,7 @@ I love checklist.
    - Delete every Research_number_X_OUTPUT-FOLDER
    - Delete the log file
    - Delete every accessory file EVERYWHERE inside the root
-   - Check the name of the essential file
+   - Check the name of the essential files
 
 9) If all is useless, report it on the GitHub section (be detailed, please)
 10) Delete the folder (`rm -r ./brivez/*`)
