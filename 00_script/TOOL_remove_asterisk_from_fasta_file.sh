@@ -18,11 +18,14 @@ echo "  ||||||        / ~@~ \             "
 echo "  ||||||       |-------|            "
 echo "  ||||||       |_______|            "
 echo ""
+
+
 echo "The asterisks will be removed by all the following *.fasta file:"
 find .. -type f -name '*.fasta' -printf "   - %f\n"
 echo ""
 echo "This operation will OVERWRITE the original files."
 read -r -p "Are you sure that you want to proceed? [y/N] " response
+# In YeS case, for every *.fasta files found, execute the sed command
 case "$response" in
     [yY][eE][sS]|[yY])
         echo ""
@@ -36,5 +39,5 @@ case "$response" in
 esac
 
 echo""
-echo "Have a beutiful day!"
+echo "Have a beautiful day!"
 echo ""
