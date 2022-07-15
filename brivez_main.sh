@@ -98,24 +98,19 @@ for everyelement in ${folder_found[@]}; do
 		echo "[] Executing the ./script02.py"
 		./brivez_script02.py
 		rm ./brivez_script02.py
-		mv ./001_deepsig_output.tsv ../$folder_name/$everyelement2/001_deepsig_output.tsv
-		mv ./002_deepsig_sequence_with_SP.fa ../$folder_name/$everyelement2/002_deepsig_sequence_with_SP
-		mv ./003_hmmer_output_table ../$folder_name/$everyelement2/003_hmmer_output_table
-		mv ./004_hmmer_output_table_data_parsed ../$folder_name/$everyelement2/004_hmmer_output_table_data_parsed
-		mv ./005_pandas_sequences_table.tsv ../$folder_name/$everyelement2/005_pandas_sequences_table.tsv
-		mv ./006_sequence_with_SP+Domain_extracted.fa ../$folder_name/$everyelement2/006_sequence_with_SP+Domain_extracted.fa
-		mv ./007_domains_of_sequences_with_SP+Domain_extracted.fa ../$folder_name/$everyelement2/007_domains_of_sequences_with_SP+Domain_extracted.fa
+		mv ./001_deepsig_output.tsv ../$folder_name/"$everyelement2"/001_deepsig_output.tsv
+		mv ./002_deepsig_sequence_with_SP.fa ../$folder_name/"$everyelement2"/002_deepsig_sequence_with_SP
+		mv ./003_hmmer_output_table ../$folder_name/"$everyelement2"/003_hmmer_output_table
+		mv ./004_hmmer_output_table_data_parsed ../$folder_name/"$everyelement2"/004_hmmer_output_table_data_parsed
+		mv ./005_pandas_sequences_table.tsv ../$folder_name/"$everyelement2"/005_pandas_sequences_table.tsv
+		mv ./006_sequence_with_SP+Domain_extracted.fa ../$folder_name/"$everyelement2"/006_sequence_with_SP+Domain_extracted.fa
+		mv ./007_domains_of_sequences_with_SP+Domain_extracted.fa ../$folder_name/"$everyelement2"/007_domains_of_sequences_with_SP+Domain_extracted.fa
+		mv ./008_domains_found.csv ../$folder_name/"$everyelement2"/008_domains_found.csv
+		mv ./009_domains_found_seaborn_plot.png ../$folder_name/"$everyelement2"/009_domains_found_seaborn_plot.png
 		cd ..
 	done
 done
 
-# ---- MUSCLE TIME -----
-echo ""
-echo "------ STARTING THE MUSCLE ANALYSIS INSIDE $folder_name -------"
-cd $folder_name
-echo "	Runing MUSCLE"
-muscle -align 002_all_domains_extracted.fasta -output 002_msa_muscle.fasta
-echo "  --> Done"
 
 # # ---- CONGRATULATION TIME -----
 echo ""

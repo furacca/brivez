@@ -7,6 +7,9 @@ import os
 import fnmatch
 import csv
 import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+import seaborn as sns
 from Bio import SeqIO
 
 # Aggiungo il nome del file del trascrittoma
@@ -68,7 +71,6 @@ with open("005_pandas_sequences_table.tsv", "r") as file_tsv:
 # '1667', '1870']}
 
 
-
 # EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
 
 name_list_of_all_seq = []
@@ -122,7 +124,8 @@ with open("006_sequence_with_SP+Domain_extracted.fa", "a") as extraction_part2:
         if dict_seq[everyelement][0] in seq_already_written:
             pass
         else:
-            extraction_part2.write(f">{root}_{dict_seq[everyelement][0][char_to_remove:]}\n{dict_seq[everyelement][5]}\n\n")
+            extraction_part2.write(
+                f">{root}_{dict_seq[everyelement][0][char_to_remove:]}\n{dict_seq[everyelement][5]}\n\n")
             seq_already_written.append(dict_seq[everyelement][0])
 
 # Reading the log
@@ -137,7 +140,8 @@ with open(f"../Research_number_{counter_log2[:-1]}_OUTPUT-FOLDER/001_all_sequenc
         if dict_seq[everyelement][0] in seq_already_written:
             pass
         else:
-            extraction_part2.write(f">{root}_{dict_seq[everyelement][0][char_to_remove:]}\n{dict_seq[everyelement][5]}\n\n")
+            extraction_part2.write(
+                f">{root}_{dict_seq[everyelement][0][char_to_remove:]}\n{dict_seq[everyelement][5]}\n\n")
             seq_already_written.append(dict_seq[everyelement][0])
 
 with open("007_domains_of_sequences_with_SP+Domain_extracted.fa", "a") as extraction_part3:
@@ -148,10 +152,35 @@ with open("007_domains_of_sequences_with_SP+Domain_extracted.fa", "a") as extrac
 
 nome_file = f"../Research_number_{counter_log2[:-1]}_OUTPUT-FOLDER/002_all_domains_extracted.fasta"
 
+all_domain_of_this_sequence_list = []
+
 with open(nome_file, "a") as extraction_part4:
     for everyelement in dict_seq:
         domain = str(dict_seq[everyelement][5])
+        domain_name = str(dict_seq[everyelement][1])
+        all_domain_of_this_sequence_list.append(domain_name)
         extraction_part4.write(
             f">{root}_{dict_seq[everyelement][0][char_to_remove:]}-{dict_seq[everyelement][1]}-from{dict_seq[everyelement][3]}to{dict_seq[everyelement][4]}\n{domain[int(dict_seq[everyelement][3]):int(dict_seq[everyelement][4])]}\n")
 
+test = {}
+for x in all_domain_of_this_sequence_list:
+    if x in test.keys():
+        test[x] += 1
+    else:
+        test[x] = 1
 
+with open('008_domains_found.csv', 'w') as csv_file:
+    writer = csv.writer(csv_file)
+    stringa = "domain_name,domain_counter\n"
+    csv_file.write(stringa)
+    for key, value in test.items():
+       writer.writerow([key, value])
+
+df = pd.read_csv("008_domains_found.csv")
+df1 = df.sort_values(by="domain_counter", ascending=False)
+df2 = df1.head(50)
+
+sns.set(rc={'figure.figsize':(15,10)})
+sns.barplot(x="domain_counter", y="domain_name", data=df2, palette="mako").set(title="First 50 domains")
+
+plt.savefig("009_domains_found_seaborn_plot.png", dpi=300)
