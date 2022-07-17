@@ -3,9 +3,6 @@
 # A Welcome art, indeed useful
 ##########################################################
 
-
-
-
 echo ""
 echo "  ____  _____  _______      ________ ______"
 echo " |  _ \|  __ \|_   _\ \    / /  ____|___  /"
@@ -18,25 +15,21 @@ echo ""
 echo "Bioinformatic tool - https://github.com/furacca/brivez"
 
 ##########################################################
+#  PREPARATION
+##########################################################
 
 echo "------ PREPARATIONS -------"
 echo ""
-
-# CLEANUP - delete all folders (and r files) containing "job.tmpd" inside their name
-
-
-# FOLDER CHECK
+# Folder check
 echo "[] Folder check"
 folder_found=( $(find . -mindepth 1 -maxdepth 1 -type d ! -path "./Research_number_*" ! -path "./00_hmm_profile_target" ! -path "./.*" ! -path "./00_script" ! -path "./.*" ) )
 echo "	*** Have been found ${#folder_found[@]} target folder ***"
-
 for everyfolder in ${folder_found[@]}; do
 	echo "	--> $everyfolder"
 done
-
 echo "$target_folder_found"
 
-# LOG CHECK
+# Log check
 echo "[] Log check"
 FILE=./log
 if [ -f "$FILE" ];then
@@ -53,7 +46,7 @@ else
 fi
 echo ""
 
-# HMM FILE CHECK
+# hmm file check
 echo "[] HMM file check"
 HMM_FILE=( $(ls ./00_hmm_profile_target) )
 echo "	In this analysis will be used $HMM_FILE file"
@@ -72,10 +65,12 @@ cd ..
 echo "		--> Created 002_all_domains_extracted.fasta file in the folder"
 echo ""
 
+##########################################################
 # ---- ANALYSIS TIME -----
-for everyelement in ${folder_found[@]}; do
-	arrayxyz=( $(echo $everyelement) )
-	for everyelement2 in ${arrayxyz[@]}; do
+##########################################################
+for everyfolder in ${folder_found[@]}; do
+	target_folder=( $(echo $everyfolder) )
+	for everyelement2 in ${target_folder[@]}; do
 		cd $folder_name
 		mkdir $everyelement2
 		cd ..
