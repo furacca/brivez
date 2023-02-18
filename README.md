@@ -29,7 +29,7 @@ All the software used are **OpenSource**.<br>
 
 - Multi-core CPU is suggested
 - Total space used: ~3.5 GB
-- SSD is stronglysuggested
+- SSD is strongly suggested
 - 16 GB RAM is suggested
 
 </td></tr>
@@ -116,7 +116,7 @@ or whatever way you prefer
 # First run
 
 1) `01_hmm_profiles`
-   - contains your hmm files 
+   - contains your hmm files (check [hmm - Pfam download](00_documentation/README_Pfam_database.md))
 
 2) `02_fasta_target` 
    - contains your fasta files
