@@ -1,0 +1,16 @@
+#                                                                            --- full sequence --- -------------- this domain -------------   hmm coord   ali coord   env coord
+# target name        accession   tlen query name           accession   qlen   E-value  score  bias   #  of  c-Evalue  i-Evalue  score  bias  from    to  from    to  from    to  acc description of target
+#------------------- ---------- ----- -------------------- ---------- ----- --------- ------ ----- --- --- --------- --------- ------ ----- ----- ----- ----- ----- ----- ----- ---- ---------------------
+sp|P04275|VWF_HUMAN  -           2813 vwA_MSA              -            417   3.5e-70  223.8   0.0   1   3   1.1e-17   1.1e-17   50.9   0.0   112   276  1276  1445  1259  1463 0.86 -
+sp|P04275|VWF_HUMAN  -           2813 vwA_MSA              -            417   3.5e-70  223.8   0.0   2   3   1.8e-23   1.8e-23   69.9   0.0   108   260  1493  1642  1485  1657 0.90 -
+sp|P04275|VWF_HUMAN  -           2813 vwA_MSA              -            417   3.5e-70  223.8   0.0   3   3   2.7e-32   2.7e-32   98.9   0.0   105   265  1684  1844  1667  1870 0.88 -
+#
+# Program:         hmmsearch
+# Version:         3.3.2 (Nov 2020)
+# Pipeline mode:   SEARCH
+# Query file:      ../01_hmm_profiles/PF00092.hmm
+# Target file:     tmp_output/02_sequences_selected.fasta
+# Option settings: hmmsearch --domtblout tmp_output/03_hmmsearch_output_table -E 1e-5 --domE 1e-5 --cpu 4 ../01_hmm_profiles/PF00092.hmm tmp_output/02_sequences_selected.fasta 
+# Current dir:     /home/furacca/VScode/brivez/brivez2/02_fasta_target
+# Date:            Sat Feb 18 14:18:04 2023
+# [ok]

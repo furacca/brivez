@@ -1,0 +1,4 @@
+	target_name	query_name	accession1	START_ali	END_ali
+0	sp|P04275|VWF_HUMAN	vwA_MSA	empty	1276	1445
+1	sp|P04275|VWF_HUMAN	vwA_MSA	empty	1493	1642
+2	sp|P04275|VWF_HUMAN	vwA_MSA	empty	1684	1844

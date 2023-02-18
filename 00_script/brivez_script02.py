@@ -1,31 +1,60 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# From domtblout to seqfastalist and domains fasta list
+# --------------------------------------------------------------
+# What this script does?
+# Good question.
 
+# --------------------------------------------------------------
+# Importing some libraries
 import os
 import fnmatch
 import csv
 import pandas as pd
-import matplotlib.pyplot as plt
-import numpy as np
-import seaborn as sns
 from Bio import SeqIO
 
-# Aggiungo il nome del file del trascrittoma
-nomedeltrascrittoma = ""
 
-for ognifile in os.listdir("./"):
-    if fnmatch.fnmatch(ognifile, "*.fasta"):
-        nomedeltrascrittoma = ognifile
+# --------------------------------------------------------------
+# Defining some functions
 
+
+def print_message(outputfilenumber):
+	print(f"Created -------->    {outputfilenumber}")
+
+	
+# --------------------------------------------------------------
+# Defining the output files' name
+
+file_04 = "04_hmmsearch_output_table_data_parsed"
+file_05 = "05_pandas_sequences_table.tsv"
+file_06 = "06_sequences_which_have_domains.fasta"
+file_07 = "07_extracted_domains.fasta"
+file_08 = "08_extracted_domains.csv"
+file_09 = "09_REPORT"
+	
+# --------------------------------------------------------------
+# Output's path
+output_path = "./tmp_output"
+
+# --------------------------------------------------------------
+# Obtaining fasta source name
+datafilename = ""
+for everyfile in os.listdir("./"):
+    if fnmatch.fnmatch(everyfile, "ROTFLMAO*"):
+        datafilename = everyfile
+fastasource = datafilename.replace("ROTFLMAO","")
+
+# --------------------------------------------------------------
+# Reading and parsing the hmmsearch output file
+
+# Setting up the header (for pandas) and write it inside 04_hmmsearch_output_table_data_parsed
 header = "target_name,accession,tlen,query_name,accession1,qlen,E-value,score,bias,#,of,c-Evalue,i-Evalue,score,bias," \
          "from,to,START_ali,END_ali,START_envelope,END_envelope,acc,description_of_target\n"
 
-with open("004_hmmer_output_table_data_parsed", "w") as new_file:
+with open(f"{output_path}/04_hmmsearch_output_table_data_parsed", "w") as new_file:
     new_file.write(header)
 
-with open("003_hmmer_output_table", "r") as file:
+with open(f"{output_path}/03_hmmsearch_output_table", "r") as file:
     for ogniriga in file:
         if ogniriga[0] == "#":
             pass
@@ -39,148 +68,197 @@ with open("003_hmmer_output_table", "r") as file:
             a = a.replace("  ", " ")
             a = a.replace("  ", " ")
             a = a.replace(" ", ",")
-            with open("004_hmmer_output_table_data_parsed", "a") as new_file:
-                new_file.write(a)
+            with open(f"{output_path}/04_hmmsearch_output_table_data_parsed", "a") as filetomod:
+                filetomod.write(a)
 
-df = pd.read_csv("004_hmmer_output_table_data_parsed")
+# Creating a pandas dataframe
+df = pd.read_csv(f"{output_path}/04_hmmsearch_output_table_data_parsed")
+print_message(file_04)
+
+# Filtering for the columns of interest
 df_selected = df[["target_name", "query_name", "accession1", "START_ali", "END_ali"]]
-df_selected.to_csv("005_pandas_sequences_table.tsv", sep="\t")
 
-temp_list_of_sequence = []
+# Saving the filtered columns in tsv file
+df_selected.to_csv(f"{output_path}/05_pandas_sequences_table.tsv", sep="\t")
+print_message(file_05)
+
+# --------------------------------------------------------------
+# Reading and parsing the hmmsearch output file
 temp_row_to_add = []
 dict_seq = {}
 
+# dict_seq counter
 counter = 0
 
-with open("005_pandas_sequences_table.tsv", "r") as file_tsv:
-    reader = csv.reader(file_tsv, delimiter='\t')
-    for row in reader:
+
+
+with open(f"{output_path}/05_pandas_sequences_table.tsv", "r") as file_tsv:
+    tsvread = csv.reader(file_tsv, delimiter='\t')
+    for row in tsvread:
         if row[0] != "":
+            # temp_row_to_add = ['sp|P04275|VWF_HUMAN', 'vwA_MSA', 'empty', '1667', '1870']
             temp_row_to_add.append(row[1])
             temp_row_to_add.append(row[2])
             temp_row_to_add.append(row[3])
             temp_row_to_add.append(row[4])
             temp_row_to_add.append(row[5])
-            # Ex.1 - temp_row_to_add = ['sp|P04275|VWF_HUMAN', 'vwA_MSA', 'empty', '1667', '1870']
             dict_seq[counter] = temp_row_to_add
             temp_row_to_add = []
             counter += 1
 
-# Dizionario a fine ciclo : {0: [' sp|P04275|VWF_HUMAN', 'vwA_MSA', 'empty', '1259', '1463'],
-# 1: ['sp|P04275|VWF_HUMAN', 'vwA_MSA', 'empty', '1485', '1657'], 2: ['sp|P04275|VWF_HUMAN', 'vwA_MSA', 'empty',
-# '1667', '1870']}
+
+#  dict_seq structure 
+# {
+# 0: ['sp|P04275|VWF_HUMAN', 'vwA_MSA', 'empty', '1259', '1463'],
+# 1: ['sp|P04275|VWF_HUMAN', 'vwA_MSA', 'empty', '1485', '1657'],
+# 2: ['sp|P04275|VWF_HUMAN', 'vwA_MSA', 'empty', '1667', '1870']
+# }
 
 
-# EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+# --------------------------------------------------------------
+# Checking the common root name for all the sequences, deleting it from the final output
+# BEFORE
+# >Californicus_californicus_transcriptome_SRR2609536_trimmed_(paired)_contig_23503.p1
+# AFTER
+# >Californicus_californicus_23503.p1
 
-name_list_of_all_seq = []
-char_to_remove = 0
+list_of_names_of_all_sequences = []
 
-with open(nomedeltrascrittoma, "r") as file_fasta:
-    for everysequence in SeqIO.parse(file_fasta, "fasta"):
-        name_list_of_all_seq.append(everysequence.id)
+with open(fastasource, "r") as file_fastasource:
+    for everysequence in SeqIO.parse(file_fastasource, "fasta"):
+        list_of_names_of_all_sequences.append(everysequence.id)
 
-if len(name_list_of_all_seq) == 1:
-    pass
-else:
-    # Guardo la lunghezza minima delle sequenze
-    word_len = 100
-    for everyword in name_list_of_all_seq:
-        if len(everyword) < word_len:
-            word_len = len(everyword)
-        else:
-            pass
-    # Calcolo quante lettere ci sono da eliminare
+# Looking for the length of the shortest sequence 
+# If you have just one sequence, you can't determine which is the root (you need two sequences or more)
 
-    a = 0
-    for everytime in range(0, word_len):
+
+# Set the chars need to be removed to zero
+char_to_be_removed_counter = 0
+    
+if len(list_of_names_of_all_sequences) > 1:
+
+    shortest_sequence_lenght = 1000
+
+    for eachname in list_of_names_of_all_sequences:
+        if len(eachname) < shortest_sequence_lenght:
+            shortest_sequence_lenght = len(eachname)    
+    
+
+    
+
+    # x = position (in the common root) of each char
+    for x in range(0, shortest_sequence_lenght):
+        
+        # List of char found in the range; if len(char_check) > 1 then there are two different char for that position -> this is where the common root ends
         char_check = []
-
-        for everyelement in name_list_of_all_seq:
-            if everyelement[a] in char_check:
+        
+        for every_sequence_name in list_of_names_of_all_sequences:
+            if every_sequence_name[x] in char_check:
                 pass
             else:
-                char_check.append(everyelement[a])
+                char_check.append(every_sequence_name[x])
 
         if len(char_check) == 1:
-            char_to_remove += 1
-        a += 1
+            char_to_be_removed_counter += 1
+    
+    
+# --------------------------------------------------------------
+# Creating the output file 06_sequence_with_domains.fasta
+# It contains the protein target (the one with SP if deepsig has been used, otherwise all protein inside the fasta source) and they sequence extracted
 
-# EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+root = fastasource.replace(".fasta", "")
 
-root = nomedeltrascrittoma.replace(".fasta", "")
-
-with open(nomedeltrascrittoma, "r") as file_fasta:
+with open(fastasource, "r") as file_fasta:
     for record in SeqIO.parse(file_fasta, "fasta"):
         for everyelement in dict_seq:
             if dict_seq[everyelement][0] == record.id:
                 dict_seq[everyelement].append(record.seq)
+		# {0: ['Proteinasuper', 'vwA_MSA', 'empty', '658', '827', Seq('RECLCGALASYAAACAGRGVRVAWREPGRCELNCPKGQVYLQCGTPCNLTCRSL...CSK')], ...}
 
 seq_already_written = []
-with open("006_sequence_with_SP+Domain_extracted.fa", "w") as extraction_part1:
+
+
+with open(f"{output_path}/06_sequences_which_have_domains.fasta", "w") as extraction_part1:
     pass
-with open("006_sequence_with_SP+Domain_extracted.fa", "a") as extraction_part2:
+with open(f"{output_path}/06_sequences_which_have_domains.fasta", "a") as extraction_part2:
     for everyelement in dict_seq:
         if dict_seq[everyelement][0] in seq_already_written:
             pass
         else:
-            extraction_part2.write(
-                f">{root}_{dict_seq[everyelement][0][char_to_remove:]}\n{dict_seq[everyelement][5]}\n\n")
+            extraction_part2.write(f">{root}_{dict_seq[everyelement][0][char_to_be_removed_counter:]}\n{dict_seq[everyelement][5]}\n\n")
+		#>Hsapiens_VWF_Proteinasuper
+		#RECLCGALASYAAACAGRGVRVAWREPGRC.....
             seq_already_written.append(dict_seq[everyelement][0])
+            
+print_message(file_06)
 
-# Reading the log
-with open("../log", "r") as file:
-    counter_log = file.read()
-counter_log2 = str(counter_log)
+# --------------------------------------------------------------
+# Creating the output file 07_extracted_domains.fasta
+# Extracing all the domains found inside the target in a single file
 
-seq_already_written = []
-with open(f"../Research_number_{counter_log2[:-1]}_OUTPUT-FOLDER/001_all_sequences_extracted.fasta",
-          "a") as extraction_part2:
-    for everyelement in dict_seq:
-        if dict_seq[everyelement][0] in seq_already_written:
-            pass
-        else:
-            extraction_part2.write(
-                f">{root}_{dict_seq[everyelement][0][char_to_remove:]}\n{dict_seq[everyelement][5]}\n\n")
-            seq_already_written.append(dict_seq[everyelement][0])
+with open(f"{output_path}/07_extracted_domains.fasta", "a") as extraction_part3:
 
-with open("007_domains_of_sequences_with_SP+Domain_extracted.fa", "a") as extraction_part3:
     for everyelement in dict_seq:
         domain = str(dict_seq[everyelement][5])
-        extraction_part3.write(
-            f">{root}_{dict_seq[everyelement][0][char_to_remove:]}-{dict_seq[everyelement][1]}-from{dict_seq[everyelement][3]}to{dict_seq[everyelement][4]}\n{domain[int(dict_seq[everyelement][3]):int(dict_seq[everyelement][4])]}\n")
+        extraction_part3.write(f">{root}_{dict_seq[everyelement][0][char_to_be_removed_counter:]}-{dict_seq[everyelement][1]}-from{dict_seq[everyelement][3]}to{dict_seq[everyelement][4]}\n{domain[int(dict_seq[everyelement][3]):int(dict_seq[everyelement][4])]}\n")
 
-nome_file = f"../Research_number_{counter_log2[:-1]}_OUTPUT-FOLDER/002_all_domains_extracted.fasta"
+print_message(file_07)
 
-all_domain_of_this_sequence_list = []
+# --------------------------------------------------------------
+# Creating the output file 08_extracted_domains.csv
+# Extracing all the domains found inside the target in a single file
 
-with open(nome_file, "a") as extraction_part4:
-    for everyelement in dict_seq:
-        domain = str(dict_seq[everyelement][5])
-        domain_name = str(dict_seq[everyelement][1])
-        all_domain_of_this_sequence_list.append(domain_name)
-        extraction_part4.write(
-            f">{root}_{dict_seq[everyelement][0][char_to_remove:]}-{dict_seq[everyelement][1]}-from{dict_seq[everyelement][3]}to{dict_seq[everyelement][4]}\n{domain[int(dict_seq[everyelement][3]):int(dict_seq[everyelement][4])]}\n")
+with open(f"{output_path}/08_extracted_domains.csv", "a") as extraction_part4:
+	header_string = "Fasta file,sequence name,domain name,length,aa coords,sequence\n"
+	extraction_part4.write(header_string)
+			
+	for everyelement in dict_seq:
+        	domain = str(dict_seq[everyelement][5])
+            domain_length = int(dict_seq[everyelement][4]) - int(dict_seq[everyelement][3])
+        	extraction_part4.write(f"{root},{dict_seq[everyelement][0][char_to_be_removed_counter:]},{dict_seq[everyelement][1]},{domain_length},{dict_seq[everyelement][3]}-{dict_seq[everyelement][4]},{domain[int(dict_seq[everyelement][3]):int(dict_seq[everyelement][4])]}\n")
 
-test = {}
-for x in all_domain_of_this_sequence_list:
-    if x in test.keys():
-        test[x] += 1
-    else:
-        test[x] = 1
+print_message(file_08)
 
-with open('008_domains_found.csv', 'w') as csv_file:
-    writer = csv.writer(csv_file)
-    stringa = "domain_name,domain_counter\n"
-    csv_file.write(stringa)
-    for key, value in test.items():
-       writer.writerow([key, value])
 
-df = pd.read_csv("008_domains_found.csv")
-df1 = df.sort_values(by="domain_counter", ascending=False)
-df2 = df1.head(50)
+# --------------------------------------------------------------
+# Creating the output file extracted_domains_from_ALL_targets.fasta
+# Combining all the domains found from ALL the target in a single fail
 
-sns.set(rc={'figure.figsize':(15,10)})
-sns.barplot(x="domain_counter", y="domain_name", data=df2, palette="mako").set(title="First 50 domains")
+with open("../tmp_folder/all_extracted_domains", "r") as newfile:
+	one_file = newfile.read().strip()
+	if one_file == "1":
+		with open("all_extracted_domains.fasta", "a") as commmonfile:
+			for everyelement in dict_seq:
+        			domain = str(dict_seq[everyelement][5])
+        			commmonfile.write(f">{root}_{dict_seq[everyelement][0][char_to_be_removed_counter:]}-{dict_seq[everyelement][1]}-from{dict_seq[everyelement][3]}to{dict_seq[everyelement][4]}\n{domain[int(dict_seq[everyelement][3]):int(dict_seq[everyelement][4])]}\n\n")
 
-plt.savefig("009_domains_found_seaborn_plot.png", dpi=300)
+
+# --------------------------------------------------------------
+# Creating the final report
+# How many domains have been found per sequence?
+
+# Filtering for the columns of interest
+df_selected2 = df[["query_name"]]
+
+listofvalues = df_selected2.values
+
+unique_domains_found = []
+domains_found_dict = {}
+
+for x in listofvalues:
+	if x[0] in unique_domains_found:
+		domains_found_dict[x[0]] += 1
+	else:
+		unique_domains_found.append(x[0])
+		domains_found_dict[x[0]] = 1
+
+domains_found_dict_sorted = dict(sorted(domains_found_dict.items(), key=lambda item: item[1], reverse=True))
+
+with open(f"{output_path}/09_domains_found.csv", "w") as domains_found_file:
+	linetowrite = ""
+	for everyitem in domains_found_dict_sorted:
+		linetowrite += f"{everyitem}, {domains_found_dict_sorted[everyitem]}\n"
+	domains_found_file.write(linetowrite)
+	
+print_message(file_09)
+

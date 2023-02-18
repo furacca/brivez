@@ -1,68 +1,70 @@
-<p align="center"><img src="./logo.png"></p>
+<p align="center"><img src="00_documentation/logo.png"></p>
 
 Brivez is a bioinformatic tool thought as Quality of Life's improvement, providing high quantity of data in a snap, 
 giving you a quick view on what you could find inside your transcriptome/sequences' list.
 
 Installation requirements aside, you will need two files:
-  - `domain_profile.hmm` of your interest (or an entire database)
-<br> Put it inside the 00_hmm_profile_target folder
-  - `Danio_rerio_sequence/s.fasta`
-<br> Put it inside the 01_Danio_rerio folder
-
-[1] Read the documentation. [2] The first time follow the checklist. [3] Run ./brivez_main.sh. [4] Done!
-
-Every sequence is analyzed by `Deepsig` which is looking for Signal Peptide; 
-the positive matches undergo to `hmmsearch` analysis, creating a table with inside the domain described by the profile.hmm used. In the end every domain found in this way is extracted and saved inside the final output file.fasta (look at the flowchart).
+  - `domain_profile.hmm`
+<br> It goes inside --> 00_hmm_profile_target folder
+  - `sequence(s).fasta`
+<br> It goes inside --> 01_Danio_rerio folder
 
 
-- **warning**: the tool strictly check if there are the domains described inside ~.hmm.<br> 
-The sequence SP+DomainTarget+DomainNotDescribedByHmmFile is a positive match (but only the first domain is going to be extracted) have been extracted inside a ~.fasta file.
+**Suggested way to proceed:**
+1) Read the documentation
+2) The first time follow the checklist
+3) Run ./brivez_main.sh
+
 
 
 **At the moment this program runs exclusively on Linux (tested on Debian 11 and Ubuntu 22.04).** <br>
-See [Future updates](#future-updates) for Mac and Windows.
+
+See [future updates](#future-updates) for Mac and Windows.
 
 All the software used are **OpenSource**.<br>
 
 <table>
-<th>Brivez runs locally, ergo offline</th>
+<th>Brivez runs locally</th>
 <tr><td>
 
 - Multi-core CPU is suggested
 - Total space used: ~3.5 GB
-- SSD is suggested
+- SSD is stronglysuggested
 - 16 GB RAM is suggested
-<br><br> The more, the better
+
 </td></tr>
 </table>
 
-# Known problems
-- Muscle v5 and Muscle on EBI server give two complete different alignments. Unfortunately, the Muscle v5 alignment is the worse one. Improvement attended for the next update.
+
 
 # Index #
-- [Flowchart](#flowchart)<br>
+- [Workflow](#workflow)<br>
 - [Software requirements](#software-requirements)<br>
 - [Quickly set up](#quickly-set-up)<br>
-- [First run and checklist](#first-run-and-checklist)<br>
-- [Avoid the following](#avoid-the-following)<br>
-- [HMMER tool in details](#HMMER-tool-in-details)<br>
+- [First run](#first-run-and-checklist)<br>
+- [Useful link](#useful-link)<br>
 - [Future updates](#future-updates)<br>
 
 
-# Flowchart
-###### _Flowchart realized with to [draw.io](https://github.com/jgraph/drawio)_
-<p align="center"><img src="./flowchart.png"></p>
+# Workflow
 
+Every sequence is analyzed by `Deepsig` which is looking for Signal Peptide; 
+the positive matches undergo to `hmmsearch` analysis, creating a table with inside the domain described by the profile.hmm used. In the end every domain found in this way is extracted and saved inside the final output file.fasta (look at the flowchart).
+
+<p align="center"><img src="00_documentation/workflow.png"></p>
+
+###### Flowchart realized with to [draw.io](https://github.com/jgraph/drawio)_
+
+<br>
 
 # Software requirements
-Long list short:
+
 - Conda (minimum ~3 GB)
 - Environment inside Conda with:
-  - Deepsig (~50 MB)
+  - Deepsig (~50 MB) **--> needs PYTHON 3.8 !**
   - Pandas (~15 MB)
   - Bio-conda (channel)
   - fnmatch (samtools ~1 MB)
-  - MUSCLE (~300 KB)
 - HMMER3 v3.3.2 (~20 MB)
 - Brivez (~1 MB)
 
@@ -71,112 +73,75 @@ Long list short:
 **01 - Quick install for [Conda](https://docs.conda.io/en/latest/)** (following the online doc is suggested):
    1) Download the installer at this [link](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html)
    2) Verify your installer hashes
-   3) In the terminal run `bash Anaconda-latest-Linux-x86_64.sh`. 
-   Now in your terminal you will see something like `(base) user@host:~$`: the `base` indicates the name of the active environment.  It's possible to create an environment _ad hoc_ running in the terminal: `conda create - n name_of_the_environment`. To see all the env use `conda env list`.
-   4) Choose the environment with `conda activate name_of_the_environment` (`conda deactivate [...]` to close the active environment).
+   3) In the terminal run <br>
+   `bash Anaconda-latest-Linux-x86_64.sh`<br> 
+   Create an environment _ad hoc_<br>
+   `conda create -n bioinfo-brivez python=3.8`<br>
+   To see all the env created<br>
+   `conda env list`
+   4) Choose the environment with <br>
+   `conda activate bioinfo-brivez`<br>
+   to close it use<br>
+   `conda deactivate bioinfo-brivez`
 
-**---- By this point be sure having activated the right environment! ----**
+**---- By this point be sure to have activated the right environment! ----**
 
 **02 - Install in Conda some stuff:**<br>
-   1) conda config --add channels bioconda
-   2) conda install -c bioconda samtools
-   3) conda install -c conda-forge dpath
-   4) conda install pandas
+   - `conda config --add channels bioconda`<br>
+   - `conda install -c bioconda samtools`<br>
+   - `conda install -c conda-forge dpath`<br>
+   - `conda install pandas`
 
 **03 - Install the predictor of signal peptides, [**DeepSig**](https://github.com/BolognaBiocomp/deepsig)**<br>
-   1) Just as described on its site, use <br>`conda install -c bioconda deepsig`
+   - Just as described on its site, use <br>`conda install -c bioconda deepsig`
 
 **04 - Install [HMMER3](http://hmmer.org/)**<br>
-   1) Just as described on its site, use<br>`sudo apt-get install hmmer` (v3.3.2 both on Ubuntu 22.04 and Debian 11).
+   - Just as described on its site, use<br>
+   `sudo apt-get install hmmer`<br>
+   (v3.3.2 both on Ubuntu 22.04 and Debian 11)
 <br> Otherwise is installable following the [official documentation](http://hmmer.org/documentation.html)
 
-**05 - Install the multiple alignments of biological sequences [**MUSCLE**](https://github.com/rcedgar/muscle)**<br>
-   1) Just as described [here](https://anaconda.org/bioconda/muscle), use <br>`conda install -c bioconda muscle`
 
-**06 - Download Brivez**<br>
-   1) Download the Brivez folder with<br>
-`git clone https://github.com/furacca/bravez`
+**05 - Download Brivez**<br>
+   - Download the Brivez folder with<br>
+`git clone https://github.com/furacca/bravez`<br>
 or whatever way you prefer
 
-# First run and checklist
+# First run
 
-BEFORE ever thinking of running Brivez you MUST:<br><br>
-**01 - GIVE PERMISSIONS TO SCRIPTS**<br>
-- Inside your folder type `chmod +x ./00_script/TOOL_chmod_the_scripts.sh && ./00_script/TOOL_chmod_the_scripts.sh`. <br>
-Now all the script files can see their job done.
+1) `01_hmm_profiles`
+   - contains your hmm files 
 
-**02 - ONE FOLDER PER ONE SEQUENCE'S LIST / TRANSCRIPTOME**<br>
-1) Create a folder (if you have multiple transcriptome, using the organism's name could be a great thing)
-2) Put your sequence's list inside the folder, **using the .fasta format** (no .fas, .fa, ..)
-3) Keep the ratio **1 transcriptome : 1 folder**
+2) `02_fasta_target` 
+   - contains your fasta files
+   - the only accepted format is fasta (no fas, fa, ...)
 
-**03 - OPTIONAL - REMOVE ALL THE ASTERISKS FROM FASTA FILE**<br>
-- Consider to remove all the asterisks from all your fasta file, with:<br>
-`./00_script/TOOL_remove_asterisk_From_fasta_file`<br>
-This will overwrite the original file.
+3) Be sure to have the right environment activated<br>
+   - `conda activate therightenvironment`
 
-**03 - ONE HMM FILE INSIDE 00_hmm_profile_target**<br>
-- Download from [Pfam](https://pfam.xfam.org/) the hmm file that you are going to use (maybe can be helpfully follow [the following guide](https://github.com/furacca/brivez/blob/main/README_Pfam_database.md)).
-
-**04 - OPTIONAL - CHECKLIST**<br>
-- Follow this [checklist](https://github.com/furacca/brivez/blob/main/README_checklist.md) to be sure that everything's ok.
-
-**05 - RUN BRIVEZ**<br>
-- In the root of the Brivez folder type in the terminal:<br>
+4) Run Brivez with<br>
 `./brivez_main.sh`
 
-**06 - CLEAN UP THE WORKSPACE**<br>
-- Delete every output folder created and the log file with<br>
-`./brivez_wipe_all.sh`
 
-# Avoid the following
-- **DO NOT CHANGE / RENAME / MOVE ANY FOLDER / FILE**, unless is something that you have added!
+# Useful link
+- [hmm - Pfam download](00_documentation/README_Pfam_database.md) <br>
+Contains tutorials on:
+   - How to download the full Pfam database
+   - How to download a specific ~.hmm file from pfam
+- [Hmmer cheatsheet](00_documentation/README_hmmer.md)
 
-# HMMER tool in details
-Brivez run hmmsearch with the following arguments:<br>
-`hmmsearch --domtblout table.output -E 1e-5 --domE 1e-5 --cpu 2 hmmfile target.fastsa`<br>
-
-This **can be edited** at **line 95** inside `brivez_man.sh`. 
-
-- `-E 1e-5`
-<br> Report target sequences with an E-value of <= X. The default is 10.0 ([read p. 104](http://eddylab.org/software/hmmer/Userguide.pdf)).
-- `--domE 1e-5`
-<br> For target sequences that have already satisfied the per-profile reporting threshold, report individual domains with a conditional E-value of <= X. The default is 10.0 ([read p. 104](http://eddylab.org/software/hmmer/Userguide.pdf)).
-- `--cpu 6`
-<br> Set the number of parallel worker threads to N. On multicore machines, the defaults is two. Can be use also --mpi in alternative ([read p. 107](http://eddylab.org/software/hmmer/Userguide.pdf)).
-
-
-From the table.output are extracted two kind of coordinates:
-- `ali coord`
-<br> The start of the [MEA](#useful-things-to-know) alignment of this domain with respect to the sequence ([read p. 72](http://eddylab.org/software/hmmer/Userguide.pdf))
-- `env coord`
-<br> The start and the end of the domain envelope on the sequence. ([read p. 72](http://eddylab.org/software/hmmer/Userguide.pdf))
-
-**By default, Brivez use the env coord**, but it's possible to **change it** on line 43 in ./00_script/brivez_script02.py:
-- change `df_selected = df[["target_name", "query_name", "accession1", "START_ali", "END_ali"]]` <br>
-- with `df_selected = df[["target_name", "query_name", "accession1", "START_envelope", "END_envelope"]]`
-<br>
-
-#### Useful things to know:
-- `hmmpress` is useful only if used with `hmmscan` ([read p. 97](http://eddylab.org/software/hmmer/Userguide.pdf))
-- `MEA` Maximum Expected Accuracy
-- `envelope` When HMMER identifies domains, it identifies what it calls an envelope bounding where the domain’s alignment most probably lies. The envelope is almost always a little wider than what HMMER chooses to show as a
-reasonably confident alignment.
-
-
+# Known problems
+None (yet).
 
 # Future updates
 
 **TOP PRIORITY**
-- Reorganizing commenting for all the code
-- Output file ready to be elaborated with Muscle/TCoffee and MrBayes (alignment.fasta/.clw, sample.nexus)
+- None
 
 **MEDIUM PRIORITY**
-- Extracted list of all SP (008_*.fa maybe?)
-- Create checkpoint to have multiple feedbacks while the program is ongoing (and create a REPORT!)
-- Rename the sequences (maybe using the folder's name for the root?)(write down a guide)
-- Choose multiple domains (multiple .hmm file, auto-reading the 00_hhm~~ folder content)
+- Simpler way to user Brivez (Docker? Appimage?)
+- List of the sequences with just one domain type (needing full Pfam database)
 
 _**LOW PRIORITY**_
-- Check some solution for Mac and Windows 10 - 11 (with Windows subsystem for Linux)
-- Choose the sequences with SP+DomainOfInterest, avoiding SP+DomainOfInterest+AnotherDomain (needing full Pfam database)
+- Check some solution for Mac and Windows (Docker?)
+- Extracted list of all SP

@@ -1,0 +1,4 @@
+target_name,accession,tlen,query_name,accession1,qlen,E-value,score,bias,#,of,c-Evalue,i-Evalue,score,bias,from,to,START_ali,END_ali,START_envelope,END_envelope,acc,description_of_target
+sp|P04275|VWF_HUMAN,empty,2813,vwA_MSA,empty,417,3.5e-70,223.8,0.0,1,3,1.1e-17,1.1e-17,50.9,0.0,112,276,1276,1445,1259,1463,0.86,-
+sp|P04275|VWF_HUMAN,empty,2813,vwA_MSA,empty,417,3.5e-70,223.8,0.0,2,3,1.8e-23,1.8e-23,69.9,0.0,108,260,1493,1642,1485,1657,0.90,-
+sp|P04275|VWF_HUMAN,empty,2813,vwA_MSA,empty,417,3.5e-70,223.8,0.0,3,3,2.7e-32,2.7e-32,98.9,0.0,105,265,1684,1844,1667,1870,0.88,-

@@ -3,17 +3,13 @@ If you want to download the entire Pfam database (~1.6 GB, extracted)
 1) The file of our interest is `Pfam-A.hmm`
 2) In your download folder open a terminal and type
    - `ftp ftp://ftp.ebi.ac.uk/`
-   - `cd pub`
-   - `cd databases`
-   - `cd Pfam`
-   - `cd current_release`
+   - `cd pub/databases/Pfam/current_release`
    - `get Pfam-A.hmm.gz`
    - `get md5_checksums`
    - `exit`
    - `md5sum --check md5_checksum`
    - `gzip -d Pfam-A.hmm.gz`
-3) Copy your file inside the `00_hmm_profile_target` folder of Brivez
-4) Done. 
+3) Copy your file inside the `00_hmm_profile_target` folder of Brivez 
 
 
 # How to download a specific ~.hmm file
@@ -25,4 +21,3 @@ If you want to download the entire Pfam database (~1.6 GB, extracted)
 6) In the left menu (inside the tab of PF00092) select "Alignments"
 7) Under the voice "Format an alignment" choice the seed or full alignment, format ~.selex and click `generate` 
 8) Copy your file inside the `00_hmm_profile_target` folder of Brivez
-9) Done. 
