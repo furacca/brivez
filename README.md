@@ -130,12 +130,14 @@ or whatever way you prefer
 
 
 # Read results
-Inside the `03_results` there will be one folder for each Brivez run:
+Inside the `03_results` you will have something like this:
 
 - Research_number_XXX
-   - fasta_target1
-   - fasta targetX
-   - Report
+   - fasta_target1 (directory)
+      - multiples files
+   - fasta targetX (directory)
+      - multiples files
+   - Report (file)
 
 
 For every fasta target there will be one folder containings the following:
