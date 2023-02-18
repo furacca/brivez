@@ -41,17 +41,22 @@ All the software used are **OpenSource**.<br>
 - [Workflow](#workflow)<br>
 - [Software requirements](#software-requirements)<br>
 - [Quickly set up](#quickly-set-up)<br>
-- [First run](#first-run-and-checklist)<br>
+- [First run](#first-run)<br>
 - [Useful link](#useful-link)<br>
 - [Future updates](#future-updates)<br>
 
 
 # Workflow
+Brivez run analysis for all the fasta files inside `02_fasta_target`.<br>
+For every analys there are multiple steps:
+- Run Deepsig looking for Signal Peptide (can be disabled with `-a`)
+- Uses the sequences found in the previously step
+- Domain search using the hmm file inside `01_hmm_profiles`
+  - If Brivez founds more than one file, it asks which one choose
+- Generates multiple output files for each fasta target
+  - A file with all the domain extraced can be genereted with `-b` option
 
-Every sequence is analyzed by `Deepsig` which is looking for Signal Peptide; 
-the positive matches undergo to `hmmsearch` analysis, creating a table with inside the domain described by the profile.hmm used. In the end every domain found in this way is extracted and saved inside the final output file.fasta (look at the flowchart).
-
-<p align="center"><img src="00_documentation/workflow.png"></p>
+<p align="center"><img src="00_documentation/workflow.png" width="50%"></p>
 
 ###### Flowchart realized with to [draw.io](https://github.com/jgraph/drawio)_
 
