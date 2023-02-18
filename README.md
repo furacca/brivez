@@ -42,6 +42,7 @@ All the software used are **OpenSource**.<br>
 - [Software requirements](#software-requirements)<br>
 - [Quickly set up](#quickly-set-up)<br>
 - [First run](#first-run)<br>
+- [Read results](#read-results)<br>
 - [Useful link](#useful-link)<br>
 - [Future updates](#future-updates)<br>
 
@@ -127,6 +128,37 @@ or whatever way you prefer
 4) Run Brivez with<br>
 `./brivez_main.sh`
 
+
+# Read results
+Inside the `03_results` there will be one folder for each Brivez run:
+
+- Research_number_XXX
+   - fasta_target1
+   - fasta targetX
+   - Report
+
+
+For every fasta target there will be one folder containings the following:
+   - **01_deepsig-analysis.tsv**
+      - Deepsig analysis; if `-a` is enabled, then is empty
+   - **02_sequences_selected.fasta**
+      - Sequences with SP by deepsig; if `-a` is enabled, all sequences are selected
+   - **03_hmmsearch_output_table**
+      - hmmsearch output
+   - **04_hmmsearch_output_table_data_parsed**
+      - hmmsearch output parsed in csv
+   - **05_pandas_sequences_table.tsv**
+      - pandas table with the list of all domains found
+   - **06_sequences_which_have_domains.fasta**
+      - list of sequences presenting domains found
+   - **07_extracted_domains.fasta**
+      - domains found extracted by the selected sequences
+   - **08_extracted_domains.csv**
+      - same as 07, but in csv format
+   - **09_domains_found.csv**
+
+**Important**
+The **08_extracted_domains.csv** file can be easyly read in calc/excel selecting all the cells and clicking on Data -> Autofilters.
 
 # Useful link
 - [hmm - Pfam download](00_documentation/README_Pfam_database.md) <br>
