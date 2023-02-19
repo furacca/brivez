@@ -48,12 +48,12 @@ All the software used are **OpenSource**.<br>
 
 
 # Workflow
-Brivez run analysis for all the fasta files inside `02_fasta_target`.<br>
-For every analysis there are multiple steps:
-- Run Deepsig looking for Signal Peptide (can be disabled with `-a`)
+Brivez analyses every fasta file insiede `02_fasta_target`.<br>
+Every single run follow these workflow:
+- Runs Deepsig looking for Signal Peptide (can be disabled with `-a`)
 - Uses the sequences found in the previously step
-- Domain search using the hmm file inside `01_hmm_profiles`
-  - If Brivez founds more than one file, it asks which one choose
+- Searches for domains using the hmm file inside `01_hmm_profiles`
+  - If Brivez founds more than one hmm file, it asks which one choose
 - Generates multiple output files for each fasta target
   - A file with all the domain extraced can be genereted with `-b` option
 
@@ -130,7 +130,7 @@ or whatever way you prefer
 
 
 # Read results
-Inside the `03_results` you will have something like this:
+Inside the `03_results` you will have your output folder, all with the same structure:
 
 - Research_number_XXX
    - fasta_target1 (directory)
