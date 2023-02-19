@@ -5,9 +5,9 @@ giving you a quick view on what you could find inside your transcriptome/sequenc
 
 Installation requirements aside, you will need two files:
   - `domain_profile.hmm`
-<br> It goes inside --> 00_hmm_profile_target folder
+<br> It goes inside --> 01_hmm_profiles folder
   - `sequence(s).fasta`
-<br> It goes inside --> 01_Danio_rerio folder
+<br> It goes inside --> 02_fasta_target
 
 
 **Suggested way to proceed:**
