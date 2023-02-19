@@ -49,7 +49,7 @@ All the software used are **OpenSource**.<br>
 
 # Workflow
 Brivez run analysis for all the fasta files inside `02_fasta_target`.<br>
-For every analys there are multiple steps:
+For every analysis there are multiple steps:
 - Run Deepsig looking for Signal Peptide (can be disabled with `-a`)
 - Uses the sequences found in the previously step
 - Domain search using the hmm file inside `01_hmm_profiles`
