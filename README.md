@@ -110,7 +110,7 @@ Every single run follow these workflow:
 
 **05 - Download Brivez**<br>
    - Download the Brivez folder with<br>
-`git clone https://github.com/furacca/bravez`<br>
+`git clone https://github.com/furacca/brivez`<br>
 or whatever way you prefer
 
 # First run
