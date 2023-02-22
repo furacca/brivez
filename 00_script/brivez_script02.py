@@ -226,7 +226,7 @@ print_message(file_08)
 with open("../tmp_folder/all_extracted_domains", "r") as newfile:
     one_file = newfile.read().strip()
     if one_file == "1":
-	    with open("all_extracted_domains.fasta", "a") as commmonfile: 
+        with open("all_extracted_domains.fasta", "a") as commmonfile:
             for everyelement in dict_seq:
                 domain = str(dict_seq[everyelement][5])
                 commmonfile.write(f">{root}_{dict_seq[everyelement][0][char_to_be_removed_counter:]}-{dict_seq[everyelement][1]}-from{dict_seq[everyelement][3]}to{dict_seq[everyelement][4]}\n{domain[int(dict_seq[everyelement][3]):int(dict_seq[everyelement][4])]}\n\n")
